@@ -182,6 +182,7 @@ public class OverlayWindow : DistantSeasWindow {
 
                     if (ImGui.Selectable(string.Format(zoneText, i + 1), selected)) {
                         Plugin.BaitManager.OverrideZone = (uint) i;
+                        this.UpdateFish();
                     }
                 }
             }
