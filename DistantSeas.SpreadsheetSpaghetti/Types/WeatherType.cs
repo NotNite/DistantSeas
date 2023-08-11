@@ -18,5 +18,7 @@ public enum WeatherType : uint {
     DustStorms = 11,
     HeatWaves = 14,
     Snow = 15,
-    Blizzards = 16
+    Blizzards = 16,
+    
+    SpectralCurrent = 145
 }
