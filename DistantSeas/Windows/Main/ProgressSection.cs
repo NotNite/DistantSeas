@@ -4,6 +4,7 @@ using System.Numerics;
 using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Raii;
+using Dalamud.Utility;
 using DistantSeas.Core;
 using ImGuiNET;
 using Lumina.Excel;
@@ -45,7 +46,7 @@ public class ProgressSection : MainWindowSection {
 
         var achievements = Plugin.AchievementTracker.Achievements
                                  .Select(x => this.achievementSheet.GetRow(x)!)
-                                 .OrderBy(x => x.Order)
+                                 .OrderBy(x => x.Name.ToDalamudString().TextValue)
                                  .ToList();
 
         var flags = ImGuiTableFlags.Borders

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Timers;
 using Dalamud.Hooking;
 using Dalamud.Logging;
@@ -33,7 +32,7 @@ public unsafe class AchievementTracker : IDisposable {
         this.ReceiveAchievementProgressHook.Enable();
 
         for (uint i = 2553; i <= 2566; i++) this.Achievements.Add(i);
-        for (uint i = 2749; i <= 2759; i++) this.Achievements.Add(i);
+        for (uint i = 2748; i <= 2759; i++) this.Achievements.Add(i);
         for (uint i = 3256; i <= 3269; i++) this.Achievements.Add(i);
 
         this.achievementTimer = new Timer(1000);
