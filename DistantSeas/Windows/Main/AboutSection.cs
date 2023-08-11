@@ -100,7 +100,8 @@ public class AboutSection : MainWindowSection {
         var translators = new[] {
             "Kung",
             "Aly",
-            "Aren"
+            "redchair",
+            "leechcop"
         };
         foreach (var translator in translators) {
             ImGui.BulletText(translator);
