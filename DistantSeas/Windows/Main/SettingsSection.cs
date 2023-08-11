@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Components;
@@ -15,6 +17,9 @@ public class SettingsSection : MainWindowSection {
     ) { }
 
     public override void Draw() {
+        this.DrawLanguageSelector();
+        ImGui.NewLine();
+
         ImGui.Checkbox(
             Loc.Localize("SettingsShowOverlay", "Show overlay"),
             ref Plugin.Configuration.ShowOverlay
@@ -85,6 +90,35 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsPreferDynamicSuggestionsDescription",
                          "Use bait with the least bite time overlap instead of community-defined baits. Will likely be less accurate.")
         );
+    }
+
+    private void DrawLanguageSelector() {
+        var strs = new List<string> {
+                Loc.Localize("SettingsUseDalamudLanguage", "Use Dalamud language")
+            }.Concat(LocalizationManager.CodesToNames.Values)
+             .ToList();
+
+        var pos = Plugin.Configuration.LanguageOverride == null
+                      ? 0
+                      : strs.IndexOf(
+                          LocalizationManager.CodesToNames[Plugin.Configuration.LanguageOverride]
+                      );
+
+        if (ImGui.Combo(
+                Loc.Localize("SettingsLanguageOverride", "Language"),
+                ref pos,
+                strs.ToArray(),
+                strs.Count
+            )) {
+            if (pos == 0) {
+                Plugin.Configuration.LanguageOverride = null;
+            } else {
+                var key = LocalizationManager.CodesToNames.First(x => x.Value == strs[pos]).Key;
+                Plugin.Configuration.LanguageOverride = key;
+            }
+
+            Plugin.LocalizationManager.Setup();
+        }
     }
 
     private void DrawOverlaySettings() {

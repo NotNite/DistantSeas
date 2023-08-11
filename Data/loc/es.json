@@ -1,410 +1,402 @@
 {
   "CommandHelpMessage": {
-    "message": "Open the Distant Seas window.",
+    "message": "Abre la ventana de \"Distant Seas\".",
     "description": "Displayed in the Plugin Installer as the description for the /pseas command."
   },
   "TimeDay": {
-    "message": "Day",
+    "message": "Dia",
     "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
   },
   "TimeSunset": {
-    "message": "Sunset",
+    "message": "Puesta de sol",
     "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
   },
   "TimeNight": {
-    "message": "Night",
+    "message": "Noche",
     "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
   },
   "VoyageMissionTypeShark": {
-    "message": "Shark",
+    "message": "Tiburón",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeJellyfish": {
-    "message": "Jellyfish",
+    "message": "Aguamala",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeCrab": {
-    "message": "Crab",
+    "message": "Cangrejo",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeFugu": {
-    "message": "Fugu",
+    "message": "Pez Globo",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeSquid": {
-    "message": "Squid",
+    "message": "Calamar",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeShrimp": {
-    "message": "Shrimp",
+    "message": "Camarones",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeShellfish": {
-    "message": "Shellfish",
+    "message": "Mariscos",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "ZoneText": {
-    "message": "Zone {0}",
+    "message": "Zona {0}",
     "description": "Displayed in the overlay, to the right of the zone name. The input is a number between 1 and 3."
   },
   "ZoneHoverText": {
-    "message": "Click to preview other zones. Weather information (and therefore suggested fish) may not be accurate.",
+    "message": "Haga clic para obtener una vista previa de otras zonas. La información meteorológica (y, por lo tanto, el pescado sugerido) puede no ser precisa.",
     "description": "Displayed in the overlay, when hovering over the current zone."
   },
   "OverlayWindowSpectralHeader": {
-    "message": "Spectral",
+    "message": "Espectral",
     "description": "Displayed in the overlay."
   },
   "OverlayWindowIntuitionHeader": {
-    "message": "Intuition",
+    "message": "Intuición",
     "description": "Displayed in the overlay."
   },
   "OverlayWindowVoyageHeader": {
-    "message": "Voyage",
+    "message": "Viaje",
     "description": "Displayed in the overlay."
   },
   "OverlayWindowNormalHeader": {
-    "message": "All",
+    "message": "Todo",
     "description": "Displayed in the overlay."
   },
   "OverlayIntTime": {
-    "message": "This fish requires intuition to catch. The intuition effect lasts {0} seconds.",
+    "message": "Este pez requiere intuición para atrapar. El efecto de intuición dura {0} segundos.",
     "description": "Displayed in the overlay."
   },
   "OverlayTooltipBiteTime": {
-    "message": "Bite time: {0}",
+    "message": "Tiempo de mordida: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipBitePower": {
-    "message": "Bite power: {0}",
+    "message": "Poder de mordida: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipStars": {
-    "message": "Stars: {0}",
+    "message": "Estrellas: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipVoyageMissionType": {
-    "message": "Voyage mission type: {0}",
+    "message": "Tipo de misión de viaje: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipBaitSwitch": {
-    "message": "Click to switch to this bait.",
+    "message": "Haga clic para cambiar a este cebo.",
     "description": "Displayed in a tooltip in the overlay."
   },
   "AboutSection": {
-    "message": "About",
+    "message": "Acerca de",
     "description": "The name of a section, displayed on the left sidebar of the main window."
   },
   "AboutSectionHeader": {
-    "message": "Distant Seas, by NotNite",
+    "message": "\"Distant Seas\", hecho por NotNite",
     "description": "Displayed in the About tab."
   },
   "AboutSectionVersion": {
-    "message": "Version {0}",
+    "message": "Versión {0}",
     "description": "Displayed in the About tab."
   },
-  "AboutSectionButtonGitHub": {
-    "message": "Open source code/issues",
-    "description": "Displayed on a clickable button at the bottom of the About tab."
-  },
-  "AboutSectionButtonDonate": {
-    "message": "Donate to the plugin developer",
-    "description": "Displayed on a clickable button at the bottom of the About tab."
-  },
   "AboutSectionDescriptionStart": {
-    "message": "Distant Seas would not be possible without these people:",
+    "message": "\"Distant Seas\" no serían posibles sin estas personas :",
     "description": "Displayed in the About tab."
   },
   "AboutSectionPohky": {
-    "message": "Pohky, for helping reverse engineer Ocean Fishing",
+    "message": "Pohky , por ayudar al ingeniero inverso Ocean Fishing",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionTyoto": {
-    "message": "Tyo'to Tayuun, for their Ocean Fishing spreadsheet",
+    "message": "Tyo'to Tayuun, por su hoja de cálculos de Ocean Fishing",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionPillowfication": {
-    "message": "pillowfication, for their Ocean Fishing website",
+    "message": "pillowfication, para su sitio web de Ocean Fishing",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionFishcord": {
-    "message": "Members of the Fisherman's Horizon Discord server, for their fishing wisdom",
+    "message": "Miembros del servidor Fisherman's Horizon Discord, por su sabiduría pesquera",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionGoatPlace": {
-    "message": "Members of the XIVLauncher & Dalamud Discord server, for their development wisdom",
+    "message": "Miembros del servidor XIVLauncher & Dalamud Discord, por su sabiduría de desarrollo",
     "description": "Displayed in a bullet point in the About tab."
   },
-  "AboutSectionTranslators": {
-    "message": "Special thanks to these lovely translators:",
-    "description": "Displayed in a bullet point in the About tab."
+  "AboutSectionButtonGitHub": {
+    "message": "Código / problemas de código abierto",
+    "description": "Displayed on a clickable button at the bottom of the About tab."
+  },
+  "AboutSectionButtonDonate": {
+    "message": "Done al desarrollador del complemento",
+    "description": "Displayed on a clickable button at the bottom of the About tab."
   },
   "JournalSection": {
-    "message": "Journal",
+    "message": "Diario",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalActive": {
-    "message": "The current boat is being actively tracked in the journal.",
+    "message": "El barco actual está siendo rastreado activamente en el diario.",
     "description": "Displayed at the top of the Journal section."
   },
   "JournalEnabled": {
-    "message": "The journal is enabled, but no boat is currently being tracked.",
+    "message": "El diario está habilitado, pero actualmente no se está rastreando ningún barco.",
     "description": "Displayed at the top of the Journal section."
   },
   "JournalDisabled": {
-    "message": "The journal is disabled.",
+    "message": "El diario está deshabilitado.",
     "description": "Displayed at the top of the Journal section."
   },
   "JournalSectionRefresh": {
-    "message": "Refresh",
+    "message": "Actualizar",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionDate": {
-    "message": "Date",
+    "message": "Fecha",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionRoute": {
-    "message": "Route",
+    "message": "Ruta",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionTime": {
-    "message": "Time",
+    "message": "Tiempo",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionPoints": {
-    "message": "Points",
+    "message": "Puntos",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionSpectrals": {
-    "message": "Spectrals",
+    "message": "Espectrales",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionButtons": {
-    "message": "Buttons",
+    "message": "Botones",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionButtonDelete": {
-    "message": "Delete",
+    "message": "Eliminar",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionButtonDeleteTooltip": {
-    "message": "This can't be undone. Hold Control to enable this button.",
+    "message": "Esto no se puede deshacer. Mantenga el control para habilitar este botón.",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "LeaderboardSection": {
-    "message": "Leaderboard",
+    "message": "Tabla de clasificación",
     "description": "Displayed in the Leaderboard section."
   },
   "LeaderboardSectionSoon": {
-    "message": "soon:tm:",
+    "message": "pronto:tm:",
     "description": "Displayed in the Leaderboard section."
   },
   "LeaderboardSectionSoon2": {
-    "message": "The leaderboard is a work in progress - stay tuned!",
+    "message": "La clasificación es un trabajo en progreso: esten atentos!",
     "description": "Displayed in the Leaderboard section."
   },
   "ProgressSection": {
-    "message": "Progress",
+    "message": "Progreso",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionHeadsUp": {
-    "message": "Looks wrong? Open the Achievements menu to sync completion state, and select On a Boat V to sync total points.",
+    "message": "Se ve mal? Abra el menú Logros para sincronizar el estado de finalización y seleccione En un Barco V para sincronizar los puntos totales.",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionCompleted": {
-    "message": "Completed",
+    "message": "Completado",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionIcon": {
-    "message": "Icon",
+    "message": "Icono",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionName": {
-    "message": "Name",
+    "message": "Nombre",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionDescription": {
-    "message": "Description",
+    "message": "Descripción",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "SchedulesSection": {
-    "message": "Schedules",
+    "message": "Horarios",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionRoute": {
-    "message": "Route",
+    "message": "Ruta",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionAmount": {
-    "message": "Amount of schedules to show",
+    "message": "Cantidad de horarios para mostrar",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionTime": {
-    "message": "Time",
+    "message": "Tiempo",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionDate": {
-    "message": "Date",
+    "message": "Fecha",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "RelativeDatePast": {
-    "message": "in the past",
+    "message": "en el pasado",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateBoarding": {
-    "message": "boarding",
+    "message": "embarque",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateSeconds": {
-    "message": "in {0} seconds",
+    "message": "en {0} segundos",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateMinutes": {
-    "message": "in {0} minutes",
+    "message": "en {0} minutos",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateHours": {
-    "message": "in {0} hours",
+    "message": "en {0} horas",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateDays": {
-    "message": "in {0} days",
+    "message": "en {0} días",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "SettingsSection": {
-    "message": "Settings",
+    "message": "Configuraciones",
     "description": "The name of a section, displayed on the left sidebar of the main window."
   },
   "SettingsShowOverlay": {
-    "message": "Show overlay",
+    "message": "Mostrar superposición",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsShowOverlayDescription": {
-    "message": "When in Ocean Fishing, draws an overlay with information about your current boat.",
+    "message": "Cuando esté en Ocean Fishing, dibuja una superposición con información sobre su barco actual.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsAlarmEnabled": {
-    "message": "Enable alarm",
+    "message": "Habilitar alarma",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmEnabledDescription": {
-    "message": "Posts a message in chat (and optionally plays a sound) before the next boat.",
+    "message": "Publica un mensaje en el chat (y opcionalmente reproduce un sonido) antes del próximo barco.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsJournalEnabled": {
-    "message": "Enable journal",
+    "message": "Habilitar diario",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsJournalEnabledDescription": {
-    "message": "Saves a log of each boat you're on. Disabling this will not remove old logs.",
+    "message": "Guarda un registro de cada barco en el que estás. Deshabilitar esto no eliminará registros antiguos.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsOceanFishingBaitsOnly": {
-    "message": "Prefer Ocean Fishing baits",
+    "message": "Prefiere cebos de pesca oceánica",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsOceanFishingBaitsOnlyDescription": {
-    "message": "Prefers Ragworm, Krill, and Plump Worm as baits when possible.",
+    "message": "Prefiere Ragworm, Krill y Plump Worm como cebos cuando sea posible.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsPreferDynamicSuggestions": {
-    "message": "Prefer dynamic suggestions",
+    "message": "Prefiere sugerencias dinámicas",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsPreferDynamicSuggestionsDescription": {
-    "message": "Use bait with the least bite time overlap instead of community-defined baits. Will likely be less accurate.",
+    "message": "Use cebo con la menor superposición de tiempo de mordida en lugar de cebos definidos por la comunidad. Probablemente será menos preciso.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
-  "SettingsUseDalamudLanguage": {
-    "message": "Use Dalamud language",
-    "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
-  },
-  "SettingsLanguageOverride": {
-    "message": "Language",
-    "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
-  },
   "SettingsLockOverlay": {
-    "message": "Lock overlay",
+    "message": "Superposición de bloqueo",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsHideVanillaOverlay": {
-    "message": "Hide original overlay",
+    "message": "Esconder la superposición original",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsHideVanillaOverlayDescription": {
-    "message": "Hides the base game fishing log and voyage missions.",
+    "message": "Oculta el registro de pesca de caza base y las misiones de viaje.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsScrollFish": {
-    "message": "Add scrollbar to fish",
+    "message": "Agregue la barra de desplazamiento al pez",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsSortFish": {
-    "message": "Group fish by type",
+    "message": "Agrupar peces por tipo",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsSortFishDescription": {
-    "message": "Groups fish into tabs.",
+    "message": "Agrupa peces en pestañas.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsDrawVoyageMissions": {
-    "message": "Show voyage missions",
+    "message": "Mostrar misiones de viaje",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsHideFinishedMissions": {
-    "message": "Hide finished voyage missions",
+    "message": "Esconder misiones de viaje terminadas",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawFishNames": {
-    "message": "Show fish names",
+    "message": "Mostrar nombres de peces",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawFishRanges": {
-    "message": "Show fish bite times",
+    "message": "Mostrar tiempos de picadura de pescado",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawIntTimes": {
-    "message": "Show intuition durations",
+    "message": "Mostrar duraciones de intuición",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawIntTimesDescription": {
-    "message": "For fish that require intuition to be caught, shows the intuition's duration next to their icons.",
+    "message": "Para los peces que requieren que se capte la intuición, muestra la duración de la intuición junto a sus íconos.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsDrawFishPoints": {
-    "message": "Show average points of fish",
+    "message": "Mostrar puntos promedio de pescado",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawFishPointsDescription": {
-    "message": "Draws the maximum points that can be obtained from each fish. This is calculated by the maximum yield of fish multiplied by the average points.",
+    "message": "Dibuja los puntos máximos que se pueden obtener de cada pez. Esto se calcula por el rendimiento máximo de pescado multiplicado por los puntos promedio.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsDrawSpectralColors": {
-    "message": "Change color in spectral currents",
+    "message": "Cambiar el color en las corrientes espectrales",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawSpectralColorsDescription": {
-    "message": "Visually indicate you are in a spectral current by tinting the background color blue.",
+    "message": "Indique visualmente que está en una corriente espectral teñiendo el color de fondo azul.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsAlarmMinutes": {
-    "message": "Minutes before to trigger",
+    "message": "Minutos antes de disparar",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmSoundEnabled": {
-    "message": "Play sound",
+    "message": "Reproducir sonido",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmSound": {
-    "message": "Sound",
+    "message": "Sonido",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmSoundDescription": {
-    "message": "The sound to play when the alarm triggers. This is the same as the <se.X> sounds in chat.",
+    "message": "El sonido para reproducir cuando se activa la alarma. Esto es lo mismo que los sonidos <se.X> en el chat.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "AlarmMessage": {
-    "message": "[Distant Seas] Next route in {0} minutes.",
+    "message": "[Distant Seas] Siguiente ruta en {0} minutos.",
     "description": "Displayed in the chat window when the alarm goes off."
+  },
+  "AboutSectionTranslators": {
+    "message": "Un agradecimiento especial a estos encantadores traductores:",
+    "description": "Displayed in a bullet point in the About tab."
   }
 }

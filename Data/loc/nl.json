@@ -1,46 +1,46 @@
 {
   "CommandHelpMessage": {
-    "message": "Open the Distant Seas window.",
+    "message": "Open de Distant Seas-weergave.",
     "description": "Displayed in the Plugin Installer as the description for the /pseas command."
   },
   "TimeDay": {
-    "message": "Day",
+    "message": "Dag",
     "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
   },
   "TimeSunset": {
-    "message": "Sunset",
+    "message": "Zonsondergang",
     "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
   },
   "TimeNight": {
-    "message": "Night",
+    "message": "Nacht",
     "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
   },
   "VoyageMissionTypeShark": {
-    "message": "Shark",
+    "message": "Haai",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeJellyfish": {
-    "message": "Jellyfish",
+    "message": "Kwal",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeCrab": {
-    "message": "Crab",
+    "message": "Krab",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeFugu": {
-    "message": "Fugu",
+    "message": "Kogelvis",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeSquid": {
-    "message": "Squid",
+    "message": "Inktvis",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeShrimp": {
-    "message": "Shrimp",
+    "message": "Garnaal",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "VoyageMissionTypeShellfish": {
-    "message": "Shellfish",
+    "message": "Schelpdier",
     "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
   },
   "ZoneText": {
@@ -48,119 +48,119 @@
     "description": "Displayed in the overlay, to the right of the zone name. The input is a number between 1 and 3."
   },
   "ZoneHoverText": {
-    "message": "Click to preview other zones. Weather information (and therefore suggested fish) may not be accurate.",
+    "message": "Klik voor informatie van andere zones. Weersinformatie (en daardoor ook gesuggereerde vissen) zijn mogelijk niet accuraat.",
     "description": "Displayed in the overlay, when hovering over the current zone."
   },
   "OverlayWindowSpectralHeader": {
-    "message": "Spectral",
+    "message": "Spectraal",
     "description": "Displayed in the overlay."
   },
   "OverlayWindowIntuitionHeader": {
-    "message": "Intuition",
+    "message": "Intuïtie",
     "description": "Displayed in the overlay."
   },
   "OverlayWindowVoyageHeader": {
-    "message": "Voyage",
+    "message": "Reis",
     "description": "Displayed in the overlay."
   },
   "OverlayWindowNormalHeader": {
-    "message": "All",
+    "message": "Alles",
     "description": "Displayed in the overlay."
   },
   "OverlayIntTime": {
-    "message": "This fish requires intuition to catch. The intuition effect lasts {0} seconds.",
+    "message": "Intuïtie is nodig om deze vis te vangen. Het intuïtie-effect duurt {0} seconden.",
     "description": "Displayed in the overlay."
   },
   "OverlayTooltipBiteTime": {
-    "message": "Bite time: {0}",
+    "message": "Bijt tijd: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipBitePower": {
-    "message": "Bite power: {0}",
+    "message": "Bijt kracht: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipStars": {
-    "message": "Stars: {0}",
+    "message": "Sterren: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipVoyageMissionType": {
-    "message": "Voyage mission type: {0}",
+    "message": "Reis missietype: {0}",
     "description": "Displayed in a tooltip in the overlay."
   },
   "OverlayTooltipBaitSwitch": {
-    "message": "Click to switch to this bait.",
+    "message": "Klik om te veranderen naar dit soort aas.",
     "description": "Displayed in a tooltip in the overlay."
   },
   "AboutSection": {
-    "message": "About",
+    "message": "Over",
     "description": "The name of a section, displayed on the left sidebar of the main window."
   },
   "AboutSectionHeader": {
-    "message": "Distant Seas, by NotNite",
+    "message": "Distant Seas, door NotNite",
     "description": "Displayed in the About tab."
   },
   "AboutSectionVersion": {
-    "message": "Version {0}",
+    "message": "Versie {0}",
     "description": "Displayed in the About tab."
   },
   "AboutSectionButtonGitHub": {
-    "message": "Open source code/issues",
+    "message": "Open source code/problemen",
     "description": "Displayed on a clickable button at the bottom of the About tab."
   },
   "AboutSectionButtonDonate": {
-    "message": "Donate to the plugin developer",
+    "message": "Doneer aan de pluginontwikkelaar",
     "description": "Displayed on a clickable button at the bottom of the About tab."
   },
   "AboutSectionDescriptionStart": {
-    "message": "Distant Seas would not be possible without these people:",
+    "message": "Distant Seas zou niet mogelijk zijn zonder deze mensen:",
     "description": "Displayed in the About tab."
   },
   "AboutSectionPohky": {
-    "message": "Pohky, for helping reverse engineer Ocean Fishing",
+    "message": "Pohky, voor hulp met het reverse-engineeren van Oceaanvissen",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionTyoto": {
-    "message": "Tyo'to Tayuun, for their Ocean Fishing spreadsheet",
+    "message": "Tyo'to Tayuun, voor de spreadsheet over Oceaanvissen",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionPillowfication": {
-    "message": "pillowfication, for their Ocean Fishing website",
+    "message": "pillowfication, voor de website over Oceaanvissen",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionFishcord": {
-    "message": "Members of the Fisherman's Horizon Discord server, for their fishing wisdom",
+    "message": "Leden van de Fisherman's Horizon Discord-server, voor hun kennis over vissen",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionGoatPlace": {
-    "message": "Members of the XIVLauncher & Dalamud Discord server, for their development wisdom",
+    "message": "Leden van de XIVLauncher & Dalamud Discord-server, voor hun kennis over software ontwikkeling",
     "description": "Displayed in a bullet point in the About tab."
   },
   "AboutSectionTranslators": {
-    "message": "Special thanks to these lovely translators:",
+    "message": "Speciale dank aan de volgende vertalers:",
     "description": "Displayed in a bullet point in the About tab."
   },
   "JournalSection": {
-    "message": "Journal",
+    "message": "Logboek",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalActive": {
-    "message": "The current boat is being actively tracked in the journal.",
+    "message": "De huidige boot wordt actief gevolgd in het logboek.",
     "description": "Displayed at the top of the Journal section."
   },
   "JournalEnabled": {
-    "message": "The journal is enabled, but no boat is currently being tracked.",
+    "message": "Het logboek is aangezet, maar er wordt geen boot gevolgd.",
     "description": "Displayed at the top of the Journal section."
   },
   "JournalDisabled": {
-    "message": "The journal is disabled.",
+    "message": "Het logboek staat uit.",
     "description": "Displayed at the top of the Journal section."
   },
   "JournalSectionRefresh": {
-    "message": "Refresh",
+    "message": "Ververs",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionDate": {
-    "message": "Date",
+    "message": "Datum",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionRoute": {
@@ -168,67 +168,67 @@
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionTime": {
-    "message": "Time",
+    "message": "Tijd",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionPoints": {
-    "message": "Points",
+    "message": "Punten",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionSpectrals": {
-    "message": "Spectrals",
+    "message": "Spectralen",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionButtons": {
-    "message": "Buttons",
+    "message": "Knoppen",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionButtonDelete": {
-    "message": "Delete",
+    "message": "Verwijder",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "JournalSectionButtonDeleteTooltip": {
-    "message": "This can't be undone. Hold Control to enable this button.",
+    "message": "Dit kan niet worden teruggedraaid. Houd Control ingedrukt op deze knop te activeren.",
     "description": "Displayed in the Journal section, most likely on a button or table header."
   },
   "LeaderboardSection": {
-    "message": "Leaderboard",
+    "message": "Scorebord",
     "description": "Displayed in the Leaderboard section."
   },
   "LeaderboardSectionSoon": {
-    "message": "soon:tm:",
+    "message": "binnenkort:tm:",
     "description": "Displayed in the Leaderboard section."
   },
   "LeaderboardSectionSoon2": {
-    "message": "The leaderboard is a work in progress - stay tuned!",
+    "message": "Het scoreboard is nog onder ontwikkeling - zet je schrap!",
     "description": "Displayed in the Leaderboard section."
   },
   "ProgressSection": {
-    "message": "Progress",
+    "message": "Vooruitgang",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionHeadsUp": {
-    "message": "Looks wrong? Open the Achievements menu to sync completion state, and select On a Boat V to sync total points.",
+    "message": "Klopt er iets niet? Open het Achievements-menu om afrondingsdata te synchroniseren, en selecteer dan On a Boat V om het aantal punten te synchroniseren.",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionCompleted": {
-    "message": "Completed",
+    "message": "Afgerond",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionIcon": {
-    "message": "Icon",
+    "message": "Icoon",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionName": {
-    "message": "Name",
+    "message": "Naam",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "ProgressSectionDescription": {
-    "message": "Description",
+    "message": "Beschrijving",
     "description": "Displayed in the Progress section, most likely on a table header."
   },
   "SchedulesSection": {
-    "message": "Schedules",
+    "message": "Schema's",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionRoute": {
@@ -236,175 +236,167 @@
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionAmount": {
-    "message": "Amount of schedules to show",
+    "message": "Aantal schema's om weer te geven",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionTime": {
-    "message": "Time",
+    "message": "Tijd",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "SchedulesSectionDate": {
-    "message": "Date",
+    "message": "Datum",
     "description": "Displayed in the Schedules section, most likely on a table header."
   },
   "RelativeDatePast": {
-    "message": "in the past",
+    "message": "in het verleden",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateBoarding": {
-    "message": "boarding",
+    "message": "nu instappen",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateSeconds": {
-    "message": "in {0} seconds",
+    "message": "over {0} seconden",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateMinutes": {
-    "message": "in {0} minutes",
+    "message": "over {0} minuten",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateHours": {
-    "message": "in {0} hours",
+    "message": "over {0} uren",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "RelativeDateDays": {
-    "message": "in {0} days",
+    "message": "over {0} dagen",
     "description": "Displayed in the Schedules section, representing a relative date. The input is a number."
   },
   "SettingsSection": {
-    "message": "Settings",
+    "message": "Instellingen",
     "description": "The name of a section, displayed on the left sidebar of the main window."
   },
   "SettingsShowOverlay": {
-    "message": "Show overlay",
+    "message": "Laat overlay zien",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsShowOverlayDescription": {
-    "message": "When in Ocean Fishing, draws an overlay with information about your current boat.",
+    "message": "Tijdens het Oceaanvissen, laat een overlay zien met informatie over de huidige boot.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsAlarmEnabled": {
-    "message": "Enable alarm",
+    "message": "Zet alarm aan",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmEnabledDescription": {
-    "message": "Posts a message in chat (and optionally plays a sound) before the next boat.",
+    "message": "Stuurt een bericht in chat (en speel optioneel ook een geluid af) voor de volgende boot.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsJournalEnabled": {
-    "message": "Enable journal",
+    "message": "Zet logboek aan",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsJournalEnabledDescription": {
-    "message": "Saves a log of each boat you're on. Disabling this will not remove old logs.",
+    "message": "Slaat logs op over elke boot waar je op zit. Uitzetten verwijdert geen oude logs.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsOceanFishingBaitsOnly": {
-    "message": "Prefer Ocean Fishing baits",
+    "message": "Voorkeur op aas van Oceaanvissen",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsOceanFishingBaitsOnlyDescription": {
-    "message": "Prefers Ragworm, Krill, and Plump Worm as baits when possible.",
+    "message": "Legt voorkeur op Ragworm, Krill, en Plump Worm als aas wanneer mogelijk.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsPreferDynamicSuggestions": {
-    "message": "Prefer dynamic suggestions",
+    "message": "Legt voorkeur op dynamische suggesties",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsPreferDynamicSuggestionsDescription": {
-    "message": "Use bait with the least bite time overlap instead of community-defined baits. Will likely be less accurate.",
+    "message": "Gebruik aas op basis van minste tijdsoverlap in plaats van community-suggesties. Zal waarschijnlijk minder accuraat zijn.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
-  "SettingsUseDalamudLanguage": {
-    "message": "Use Dalamud language",
-    "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
-  },
-  "SettingsLanguageOverride": {
-    "message": "Language",
-    "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
-  },
   "SettingsLockOverlay": {
-    "message": "Lock overlay",
+    "message": "Versleutel overlay",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsHideVanillaOverlay": {
-    "message": "Hide original overlay",
+    "message": "Verberg originele overlay",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsHideVanillaOverlayDescription": {
-    "message": "Hides the base game fishing log and voyage missions.",
+    "message": "Verbergt het vislogboek en de reismissies van het spel zelf.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsScrollFish": {
-    "message": "Add scrollbar to fish",
+    "message": "Voeg schuifbalk toe aan vissen",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsSortFish": {
-    "message": "Group fish by type",
+    "message": "Groepeer vissen op basis van soort",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsSortFishDescription": {
-    "message": "Groups fish into tabs.",
+    "message": "Groepeert vissen in tabbladen.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsDrawVoyageMissions": {
-    "message": "Show voyage missions",
+    "message": "Laat reismissies zien",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsHideFinishedMissions": {
-    "message": "Hide finished voyage missions",
+    "message": "Verberg afgeronde reismissies",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawFishNames": {
-    "message": "Show fish names",
+    "message": "Laat namen van vissen zien",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawFishRanges": {
-    "message": "Show fish bite times",
+    "message": "Laat bijt tijden van vissen zien",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawIntTimes": {
-    "message": "Show intuition durations",
+    "message": "Laat intuïtieduren zien",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawIntTimesDescription": {
-    "message": "For fish that require intuition to be caught, shows the intuition's duration next to their icons.",
+    "message": "Voor vissen waarbij intuïtie nodig is, laat de duur van intuïtie naast het icoon van de vis zien.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsDrawFishPoints": {
-    "message": "Show average points of fish",
+    "message": "Laat gemiddelde punten van vissen zien",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawFishPointsDescription": {
-    "message": "Draws the maximum points that can be obtained from each fish. This is calculated by the maximum yield of fish multiplied by the average points.",
+    "message": "Laat het maximum aantal punten zien die verkrijgbaar zijn per vis. Dit is het product van de maximum opbrengst van de vis en het gemiddelde aantal punten.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsDrawSpectralColors": {
-    "message": "Change color in spectral currents",
+    "message": "Verander kleur in spectrale stromingen",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsDrawSpectralColorsDescription": {
-    "message": "Visually indicate you are in a spectral current by tinting the background color blue.",
+    "message": "Laat visueel zien dat je in een spectrale stroming zit door de achtergrondskleur blauwer te maken.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "SettingsAlarmMinutes": {
-    "message": "Minutes before to trigger",
+    "message": "Minuten van te voren om af te gaan",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmSoundEnabled": {
-    "message": "Play sound",
+    "message": "Speel geluid af",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmSound": {
-    "message": "Sound",
+    "message": "Geluid",
     "description": "Displayed in the Settings tab - most likely a label accompanied by a configurable option."
   },
   "SettingsAlarmSoundDescription": {
-    "message": "The sound to play when the alarm triggers. This is the same as the <se.X> sounds in chat.",
+    "message": "Het geluid dat afgespeeld wordt wanneer de alarm afgaat. Deze zijn hetzelfde als de <se.X> geluiden in chat.",
     "description": "Displayed in the Settings tab, as a help label next to a configurable option."
   },
   "AlarmMessage": {
-    "message": "[Distant Seas] Next route in {0} minutes.",
+    "message": "[Distant Seas] Volgende route over {0} minuten.",
     "description": "Displayed in the chat window when the alarm goes off."
   }
 }

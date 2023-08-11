@@ -48,13 +48,15 @@ public sealed class Plugin : IDalamudPlugin {
     public static Configuration Configuration = null!;
     public static ImageCache ImageCache = null!;
     public static WindowManager WindowManager = null!;
-    
+
     public static GameFontHandle HeaderFontHandle = null!;
 
     public static event Action? EnteredOceanFishing;
     public static event Action? ExitedOceanFishing;
 
     public Plugin() {
+        Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+        
         Journal = new Journal();
         AchievementTracker = new AchievementTracker();
         NormalStateTracker = new NormalStateTracker();
@@ -66,7 +68,6 @@ public sealed class Plugin : IDalamudPlugin {
         BaitManager = new BaitManager();
         AlarmManager = new AlarmManager();
 
-        Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
         ImageCache = new ImageCache();
         WindowManager = new WindowManager();
 
@@ -92,7 +93,7 @@ public sealed class Plugin : IDalamudPlugin {
         AchievementTracker.Dispose();
         AlarmManager.Dispose();
         BaitManager.Dispose();
-        
+
         HeaderFontHandle.Dispose();
     }
 

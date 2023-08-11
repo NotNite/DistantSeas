@@ -1,0 +1,82 @@
+{
+  "CommandHelpMessage": {
+    "message": "Distant Seasのウィンドウを表示する。",
+    "description": "Displayed in the Plugin Installer as the description for the /pseas command."
+  },
+  "TimeDay": {
+    "message": "昼",
+    "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
+  },
+  "TimeSunset": {
+    "message": "夕",
+    "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
+  },
+  "TimeNight": {
+    "message": "夜",
+    "description": "A time of day. Displayed in the Schedules section, and on a tooltip in the overlay."
+  },
+  "VoyageMissionTypeShark": {
+    "message": "サメ",
+    "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
+  },
+  "VoyageMissionTypeJellyfish": {
+    "message": "クラゲ",
+    "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
+  },
+  "VoyageMissionTypeCrab": {
+    "message": "カニ",
+    "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
+  },
+  "VoyageMissionTypeFugu": {
+    "message": "フグ",
+    "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
+  },
+  "VoyageMissionTypeSquid": {
+    "message": "イカ",
+    "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
+  },
+  "VoyageMissionTypeShrimp": {
+    "message": "海老",
+    "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
+  },
+  "VoyageMissionTypeShellfish": {
+    "message": "貝",
+    "description": "A type of fish, used in voyage missions. Displayed on a tooltip in the overlay."
+  },
+  "OverlayWindowSpectralHeader": {
+    "message": "幻海流",
+    "description": "Displayed in the overlay."
+  },
+  "OverlayWindowIntuitionHeader": {
+    "message": "直感",
+    "description": "Displayed in the overlay."
+  },
+  "OverlayWindowNormalHeader": {
+    "message": "すべて",
+    "description": "Displayed in the overlay."
+  },
+  "OverlayIntTime": {
+    "message": "この魚には漁師の直感の必要がある。効果時間が{0}秒である。",
+    "description": "Displayed in the overlay."
+  },
+  "OverlayTooltipBiteTime": {
+    "message": "アタリがあるまでの時間：{0}",
+    "description": "Displayed in a tooltip in the overlay."
+  },
+  "OverlayTooltipBaitSwitch": {
+    "message": "この釣り餌を選ぶためにクリックする。",
+    "description": "Displayed in a tooltip in the overlay."
+  },
+  "AboutSection": {
+    "message": "Distant Seasについて",
+    "description": "The name of a section, displayed on the left sidebar of the main window."
+  },
+  "AboutSectionHeader": {
+    "message": "Distant Seas、NotNite著",
+    "description": "Displayed in the About tab."
+  },
+  "JournalSectionRoute": {
+    "message": "航路",
+    "description": "Displayed in the Journal section, most likely on a button or table header."
+  }
+}

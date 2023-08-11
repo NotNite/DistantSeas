@@ -8,6 +8,8 @@ namespace DistantSeas;
 public class Configuration : IPluginConfiguration {
     public int Version { get; set; } = 0;
 
+    [JsonProperty] public string? LanguageOverride = null;
+
     [JsonProperty] public bool ShowOverlay = true;
     [JsonProperty] public bool LockOverlay = true;
     [JsonProperty] public bool HideVanillaOverlay = false;
