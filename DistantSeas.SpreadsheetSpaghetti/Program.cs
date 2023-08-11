@@ -261,7 +261,9 @@ Fish ParseFish(RouteType type, uint[] baits, List<string> availability, string r
         ItemId = fishItem.RowId,
         CellType = cellType,
         VoyageMissionType = voyageMissionType,
-        CanCauseSpectral = fishItem.Name.TextValue().Contains("Spectral"),
+        CanCauseSpectral = fishItem.Name.TextValue().Contains("Spectral")
+                           // Okay man
+                           || fishItem.Name.TextValue() == "Spectresaur",
 
         RequiredBait = requiredBait,
         BiteTimes = biteTimes,
