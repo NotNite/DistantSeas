@@ -8,6 +8,7 @@ using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Raii;
+using Dalamud.Logging;
 using Dalamud.Utility;
 using DistantSeas.Core;
 using DistantSeas.SpreadsheetSpaghetti.Types;
@@ -96,23 +97,28 @@ public class OverlayWindow : DistantSeasWindow {
     }
 
     public override void Draw() {
-        this.DrawHeader();
+        try {
+            this.DrawHeader();
 
-        ImGui.Separator();
+            ImGui.Separator();
 
-        if (Plugin.Configuration.DrawVoyageMissions) {
-            if (this.DrawVoyageMissions()) {
-                ImGui.Separator();
+            if (Plugin.Configuration.DrawVoyageMissions) {
+                if (this.DrawVoyageMissions()) {
+                    ImGui.Separator();
+                }
             }
-        }
 
-        if (Plugin.Configuration.ScrollFish) {
-            var maxSize = ImGui.GetContentRegionAvail() with {Y = 300 * ImGuiHelpers.GlobalScale};
-            using (ImRaii.Child("##DistantSeasScrollFish", maxSize)) {
+            if (Plugin.Configuration.ScrollFish) {
+                var maxSize = ImGui.GetContentRegionAvail() with {Y = 300 * ImGuiHelpers.GlobalScale};
+                using (ImRaii.Child("##DistantSeasScrollFish", maxSize)) {
+                    this.DrawFish();
+                }
+            } else {
                 this.DrawFish();
             }
-        } else {
-            this.DrawFish();
+        } catch (Exception e) {
+            // Catch here to prevent Blue Leakage:tm:
+            PluginLog.Error(e, "Error drawing overlay window");
         }
     }
 
