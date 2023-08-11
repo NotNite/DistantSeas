@@ -107,23 +107,23 @@ public unsafe class Journal : IDisposable {
                 }
             }
 
-            if (stateTracker.MissionState.Count == 3) {
+            if (stateTracker.IsDataLoaded) {
                 var one = stateTracker.MissionState[0];
                 var two = stateTracker.MissionState[1];
                 var three = stateTracker.MissionState[2];
 
                 // this sucks lmao
-                if (this.missionOne > one.Progress) {
+                if (one.Progress > this.missionOne) {
                     this.missionOne = one.Progress;
                     this.entries.Add(new LogEntryMissionUpdate(one));
                 }
 
-                if (this.missionTwo > two.Progress) {
+                if (two.Progress > this.missionTwo) {
                     this.missionTwo = two.Progress;
                     this.entries.Add(new LogEntryMissionUpdate(two));
                 }
 
-                if (this.missionThree > three.Progress) {
+                if (three.Progress > this.missionThree) {
                     this.missionThree = three.Progress;
                     this.entries.Add(new LogEntryMissionUpdate(three));
                 }
@@ -147,7 +147,7 @@ public unsafe class Journal : IDisposable {
         this.entries.Add(new LogEntryExitBoat());
         this.SaveToFile();
         this.entries.Clear();
-        
+
         Plugin.AchievementTracker.AddPoints(this.totalPoints);
 
         this.points = 0;
