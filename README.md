@@ -1,5 +1,9 @@
 ﻿# Distant Seas
 
+<a href="https://weblate.n2.pm/engage/distant-seas/">
+  <img src="https://weblate.n2.pm/widgets/distant-seas/-/distant-seas/svg-badge.svg" alt="Translation status" />
+</a>
+
 Distant Seas is a [Dalamud](https://github.com/goatcorp/Dalamud) plugin that aims to improve Ocean Fishing:
 
 - Automatic, context-aware bait suggestor
