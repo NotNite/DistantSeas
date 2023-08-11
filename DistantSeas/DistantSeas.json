@@ -1,0 +1,13 @@
+{
+  "Author": "NotNite",
+  "Name": "Distant Seas",
+  "Punchline": "The ultimate Ocean Fishing plugin.",
+  "Description": "The ultimate Ocean Fishing plugin. Automatically suggests baits, logs each boat you're on, tracks progress to achievements, adds a global point leaderboard, and more!\n\nIcon from the Mutant Standard project.",
+  "InternalName": "DistantSeas",
+  "IconUrl": "https://raw.githubusercontent.com/NotNite/DistantSeas/main/Data/icon.png",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "ocean",
+    "fishing"
+  ]
+}
