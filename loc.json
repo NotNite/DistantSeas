@@ -103,6 +103,14 @@
     "message": "Version {0}",
     "description": "Displayed in the About tab."
   },
+  "AboutSectionButtonGitHub": {
+    "message": "Open source code/issues",
+    "description": "Displayed on a clickable button at the bottom of the About tab."
+  },
+  "AboutSectionButtonDonate": {
+    "message": "Donate to the plugin developer",
+    "description": "Displayed on a clickable button at the bottom of the About tab."
+  },
   "AboutSectionDescriptionStart": {
     "message": "Distant Seas would not be possible without these people:",
     "description": "Displayed in the About tab."
@@ -127,13 +135,9 @@
     "message": "Members of the XIVLauncher & Dalamud Discord server, for their development wisdom",
     "description": "Displayed in a bullet point in the About tab."
   },
-  "AboutSectionButtonGitHub": {
-    "message": "Open source code/issues",
-    "description": "Displayed on a clickable button at the bottom of the About tab."
-  },
-  "AboutSectionButtonDonate": {
-    "message": "Donate to the plugin developer",
-    "description": "Displayed on a clickable button at the bottom of the About tab."
+  "AboutSectionTranslators": {
+    "message": "Special thanks to these lovely translators:",
+    "description": "Displayed in a bullet point in the About tab."
   },
   "JournalSection": {
     "message": "Journal",

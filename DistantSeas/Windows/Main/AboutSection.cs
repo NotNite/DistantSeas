@@ -38,6 +38,20 @@ public class AboutSection : MainWindowSection {
         ImGuiHelpers.CenteredText(headerStr);
         ImGuiHelpers.CenteredText(string.Format(versionStr, version));
 
+        var githubButtonStr = Loc.Localize("AboutSectionButtonGitHub", "Open source code/issues");
+        var donateButtonStr = Loc.Localize("AboutSectionButtonDonate", "Donate to the plugin developer");
+
+        var githubButtonSize = ImGuiHelpers.GetButtonSize(githubButtonStr);
+        var donateButtonSize = ImGuiHelpers.GetButtonSize(donateButtonStr);
+        var buttonSize = Vector2.Max(githubButtonSize, donateButtonSize);
+
+        var size = (buttonSize.X * 2) + ImGui.GetStyle().ItemSpacing.X;
+        ImGuiHelpers.CenterCursorFor((int) size);
+
+        this.LinkButton(githubButtonStr, buttonSize, "https://github.com/NotNite/DistantSeas");
+        ImGui.SameLine();
+        this.LinkButton(donateButtonStr, buttonSize, "https://notnite.com/givememoney");
+
         ImGui.NewLine();
 
         // Note to all translators: I'm sorry
@@ -75,22 +89,21 @@ public class AboutSection : MainWindowSection {
                          "Members of the XIVLauncher & Dalamud Discord server, for their development wisdom")
         );
         this.IconLinkButton("https://goat.place/");
-        
-        ImGui.NewLine();
-        
-        var githubButtonStr = Loc.Localize("AboutSectionButtonGitHub", "Open source code/issues");
-        var donateButtonStr = Loc.Localize("AboutSectionButtonDonate", "Donate to the plugin developer");
-        
-        var githubButtonSize = ImGuiHelpers.GetButtonSize(githubButtonStr);
-        var donateButtonSize = ImGuiHelpers.GetButtonSize(donateButtonStr);
-        var buttonSize = Vector2.Max(githubButtonSize, donateButtonSize);
 
-        var size = (buttonSize.X * 2) + ImGui.GetStyle().ItemSpacing.X;
-        ImGuiHelpers.CenterCursorFor((int) size);
-        
-        this.LinkButton(githubButtonStr, buttonSize, "https://github.com/NotNite/DistantSeas");
-        ImGui.SameLine();
-        this.LinkButton(donateButtonStr, buttonSize, "https://notnite.com/givememoney");
+        ImGui.NewLine();
+
+        ImGui.TextUnformatted(
+            Loc.Localize("AboutSectionTranslators",
+                         "Special thanks to these lovely translators:")
+        );
+
+        var translators = new[] {
+            "Kung",
+            "Aly"
+        };
+        foreach (var translator in translators) {
+            ImGui.BulletText(translator);
+        }
     }
 
     private void IconLinkButton(string link) {
