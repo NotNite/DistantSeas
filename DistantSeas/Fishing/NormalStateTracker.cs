@@ -140,17 +140,16 @@ public unsafe class NormalStateTracker : IStateTracker {
     }
 
     private void NukeAddonsFromOrbit() {
-        var shouldHide = Plugin.Configuration.HideVanillaOverlay;
-        var newVisible = !shouldHide;
+        if (Plugin.Configuration.HideVanillaOverlay) {
+            var fishingLog = (AtkUnitBase*) Plugin.GameGui.GetAddonByName("IKDFishingLog");
+            if (fishingLog != null && fishingLog->IsVisible) {
+                fishingLog->IsVisible = false;
+            }
 
-        var fishingLog = (AtkUnitBase*) Plugin.GameGui.GetAddonByName("IKDFishingLog");
-        if (fishingLog != null && fishingLog->IsVisible != newVisible) {
-            fishingLog->IsVisible = newVisible;
-        }
-
-        var mission = (AtkUnitBase*) Plugin.GameGui.GetAddonByName("IKDMission");
-        if (mission != null && mission->IsVisible != newVisible) {
-            mission->IsVisible = newVisible;
+            var mission = (AtkUnitBase*) Plugin.GameGui.GetAddonByName("IKDMission");
+            if (mission != null && mission->IsVisible) {
+                mission->IsVisible = false;
+            }
         }
     }
 }
