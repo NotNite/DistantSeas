@@ -21,6 +21,7 @@ public class AlarmManager : IDisposable {
 
     private void FrameworkUpdate(Framework framework) {
         if (!Plugin.Configuration.AlarmEnabled) return;
+        if (!Plugin.ClientState.IsLoggedIn) return;
 
         this.nextRoute = Plugin.FishData.GetNextRouteTime();
         if (this.lastAlertedFor == this.nextRoute) return;
