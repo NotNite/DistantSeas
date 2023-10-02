@@ -2,6 +2,7 @@
 using System.Linq;
 using Dalamud.Game;
 using Dalamud.Game.Gui;
+using Dalamud.Plugin.Services;
 using DistantSeas.SpreadsheetSpaghetti.Types;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
@@ -79,7 +80,7 @@ public unsafe class NormalStateTracker : IStateTracker {
         return InventoryManager.Instance()->GetInventoryItemCount(id);
     }
 
-    private void FrameworkUpdate(Framework framework) {
+    private void FrameworkUpdate(IFramework framework) {
         this.NukeAddonsFromOrbit();
 
         var teri = Plugin.ClientState.TerritoryType;

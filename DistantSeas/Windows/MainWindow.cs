@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Dalamud.Interface;
-using Dalamud.Interface.Raii;
+using Dalamud.Interface.Utility;
+using Dalamud.Interface.Utility.Raii;
 using DistantSeas.Core;
 using ImGuiNET;
 

@@ -7,7 +7,8 @@ using CheapLoc;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
-using Dalamud.Interface.Raii;
+using Dalamud.Interface.Utility;
+using Dalamud.Interface.Utility.Raii;
 using Dalamud.Logging;
 using Dalamud.Utility;
 using DistantSeas.Core;
@@ -200,7 +201,7 @@ public class OverlayWindow : DistantSeasWindow {
         var currentBait = Plugin.BaitManager.CurrentBait;
         if (currentBait != 0) {
             var baitItem = this.itemSheet.GetRow(currentBait)!;
-            var baitIcon = Plugin.ImageCache.GetIcon(baitItem.Icon);
+            var baitIcon = Plugin.TextureProvider.GetIcon(baitItem.Icon)!;
 
             var lineHeight = ImGui.GetTextLineHeight();
             var imageHeight = new Vector2(lineHeight, lineHeight);
@@ -328,7 +329,7 @@ public class OverlayWindow : DistantSeasWindow {
         for (var i = 0; i < baitChain.Count; i++) {
             var itemId = baitChain[i];
             var item = this.itemSheet.GetRow(itemId)!;
-            var icon = Plugin.ImageCache.GetIcon(item.Icon);
+            var icon = Plugin.TextureProvider.GetIcon(item.Icon);
 
             var canSwitchBait = Utils.IsBait(itemId)
                                 && Plugin.BaitManager.CanChangeBait()

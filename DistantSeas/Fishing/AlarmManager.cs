@@ -1,6 +1,7 @@
 ﻿using System;
 using CheapLoc;
 using Dalamud.Game;
+using Dalamud.Plugin.Services;
 using DistantSeas.SpreadsheetSpaghetti.Types;
 using FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -19,7 +20,7 @@ public class AlarmManager : IDisposable {
         Plugin.Framework.Update -= this.FrameworkUpdate;
     }
 
-    private void FrameworkUpdate(Framework framework) {
+    private void FrameworkUpdate(IFramework framework) {
         if (!Plugin.Configuration.AlarmEnabled) return;
         if (!Plugin.ClientState.IsLoggedIn) return;
 

@@ -2,16 +2,17 @@
 using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Components;
+using Dalamud.Interface.Internal;
+using Dalamud.Interface.Utility;
 using Dalamud.Utility;
 using DistantSeas.Core;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using ImGuiNET;
-using ImGuiScene;
 
 namespace DistantSeas.Windows.Main;
 
 public class AboutSection : MainWindowSection {
-    private TextureWrap icon;
+    private IDalamudTextureWrap icon;
 
     public AboutSection() : base(
         FontAwesomeIcon.InfoCircle,

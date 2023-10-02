@@ -3,7 +3,7 @@ using System.Linq;
 using System.Numerics;
 using CheapLoc;
 using Dalamud.Interface;
-using Dalamud.Interface.Raii;
+using Dalamud.Interface.Utility.Raii;
 using Dalamud.Logging;
 using Dalamud.Utility;
 using DistantSeas.SpreadsheetSpaghetti.Types;

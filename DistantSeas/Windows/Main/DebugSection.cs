@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Dalamud.Interface;
-using Dalamud.Interface.Raii;
+using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
 using DistantSeas.Core;
 using DistantSeas.Fishing;
@@ -165,7 +165,7 @@ public unsafe class DebugSection : MainWindowSection {
             ImGui.Separator();
 
             var fishItem = this.item.GetRow(fishy.ItemId)!;
-            var icon = Plugin.ImageCache.GetIcon(fishItem.Icon);
+            var icon = Plugin.TextureProvider.GetIcon(fishItem.Icon)!;
             var lineHeight = ImGui.GetTextLineHeight();
             var iconSize = new Vector2(lineHeight, lineHeight);
 
@@ -179,7 +179,7 @@ public unsafe class DebugSection : MainWindowSection {
                     foreach (var biteTime in fishy.BiteTimes) {
                         var bait = this.item.GetRow(biteTime.Key)!;
                         var baitName = bait.Name.ToDalamudString().TextValue;
-                        var baitIcon = Plugin.ImageCache.GetIcon(bait.Icon);
+                        var baitIcon = Plugin.TextureProvider.GetIcon(bait.Icon)!;
                         var timeStr = Utils.FormatRange(biteTime.Value.Range);
 
                         ImGui.Image(baitIcon.ImGuiHandle, iconSize);
@@ -203,7 +203,7 @@ public unsafe class DebugSection : MainWindowSection {
                         foreach (var (id, amount) in fishy.Intuition.Fish) {
                             var fishRow = this.item.GetRow(id)!;
                             var fishName = fishRow.Name.ToDalamudString().TextValue;
-                            var fishIcon = Plugin.ImageCache.GetIcon(fishRow.Icon);
+                            var fishIcon = Plugin.TextureProvider.GetIcon(fishRow.Icon)!;
 
                             ImGui.Image(fishIcon.ImGuiHandle, iconSize);
                             ImGui.SameLine();
@@ -231,7 +231,7 @@ public unsafe class DebugSection : MainWindowSection {
                                 if (weatherEntry.Value) {
                                     var weatherRow = this.weather.GetRow((uint) weatherEntry.Key)!;
                                     var weatherName = weatherRow.Name.ToDalamudString().TextValue;
-                                    var weatherIcon = Plugin.ImageCache.GetIcon((uint) weatherRow.Icon);
+                                    var weatherIcon = Plugin.TextureProvider.GetIcon((uint) weatherRow.Icon)!;
 
                                     ImGui.Image(weatherIcon.ImGuiHandle, iconSize);
                                     ImGui.SameLine();

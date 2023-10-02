@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Dalamud.Game;
 using Dalamud.Hooking;
+using Dalamud.Plugin.Services;
 using Dalamud.Utility.Signatures;
 using DistantSeas.SpreadsheetSpaghetti;
 using DistantSeas.SpreadsheetSpaghetti.Types;
@@ -44,7 +45,7 @@ public unsafe class Journal : IDisposable {
     public Hook<OnIKDFishCaughtDelegate> OnIKDFishCaughtHook = null!;
 
     public Journal() {
-        SignatureHelper.Initialise(this);
+        Plugin.GameInteropProvider.InitializeFromAttributes(this);
         this.OnIKDFishCaughtHook.Enable();
 
         Plugin.Framework.Update += this.FrameworkUpdate;
@@ -60,7 +61,7 @@ public unsafe class Journal : IDisposable {
         Plugin.ExitedOceanFishing -= this.ExitedOceanFishing;
     }
 
-    private void FrameworkUpdate(Framework framework) {
+    private void FrameworkUpdate(IFramework framework) {
         var result = AgentModule.Instance()->GetAgentIKDResult();
         if (result != null && result->Data != null) {
             var newTotalPoints = result->Data->TotalScore;

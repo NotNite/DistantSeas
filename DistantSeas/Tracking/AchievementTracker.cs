@@ -28,7 +28,7 @@ public unsafe class AchievementTracker : IDisposable {
     public Hook<ReceiveAchievementProgressDelegate> ReceiveAchievementProgressHook = null!;
 
     public AchievementTracker() {
-        SignatureHelper.Initialise(this);
+        Plugin.GameInteropProvider.InitializeFromAttributes(this);
         this.ReceiveAchievementProgressHook.Enable();
 
         for (uint i = 2553; i <= 2566; i++) this.Achievements.Add(i);

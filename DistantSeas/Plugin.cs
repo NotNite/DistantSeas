@@ -21,15 +21,16 @@ public sealed class Plugin : IDalamudPlugin {
     private const string CommandName = "/pseas";
 
     [PluginService] public static DalamudPluginInterface PluginInterface { get; private set; } = null!;
-    [PluginService] public static CommandManager CommandManager { get; private set; } = null!;
-    [PluginService] public static Framework Framework { get; private set; } = null!;
-    [PluginService] public static SigScanner SigScanner { get; private set; } = null!;
-    [PluginService] public static ClientState ClientState { get; private set; } = null!;
-    [PluginService] public static Condition Condition { get; private set; } = null!;
-    [PluginService] public static DataManager DataManager { get; private set; } = null!;
-    [PluginService] public static ChatGui ChatGui { get; private set; } = null!;
-    [PluginService] public static GameGui GameGui { get; private set; } = null!;
+    [PluginService] public static ICommandManager CommandManager { get; private set; } = null!;
+    [PluginService] public static IFramework Framework { get; private set; } = null!;
+    [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
+    [PluginService] public static IClientState ClientState { get; private set; } = null!;
+    [PluginService] public static ICondition Condition { get; private set; } = null!;
+    [PluginService] public static IDataManager DataManager { get; private set; } = null!;
+    [PluginService] public static IChatGui ChatGui { get; private set; } = null!;
+    [PluginService] public static IGameGui GameGui { get; private set; } = null!;
     [PluginService] public static ITextureProvider TextureProvider { get; private set; } = null!;
+    [PluginService] public static IGameInteropProvider GameInteropProvider { get; private set; } = null!;
 
     public static IStateTracker NormalStateTracker = null!;
     public static DebugStateTracker DebugStateTracker = null!;
@@ -46,7 +47,6 @@ public sealed class Plugin : IDalamudPlugin {
     public static AchievementTracker AchievementTracker = null!;
 
     public static Configuration Configuration = null!;
-    public static ImageCache ImageCache = null!;
     public static WindowManager WindowManager = null!;
 
     public static GameFontHandle HeaderFontHandle = null!;
@@ -68,7 +68,6 @@ public sealed class Plugin : IDalamudPlugin {
         BaitManager = new BaitManager();
         AlarmManager = new AlarmManager();
 
-        ImageCache = new ImageCache();
         WindowManager = new WindowManager();
 
         CommandManager.AddHandler(CommandName, new CommandInfo(this.OnCommand) {
@@ -84,7 +83,6 @@ public sealed class Plugin : IDalamudPlugin {
         CommandManager.RemoveHandler(CommandName);
 
         WindowManager.Dispose();
-        ImageCache.Dispose();
 
         NormalStateTracker.Dispose();
         DebugStateTracker.Dispose();

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using Dalamud.Game;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Logging;
+using Dalamud.Plugin.Services;
 using DistantSeas.SpreadsheetSpaghetti.Types;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using Lumina.Excel;
@@ -41,7 +42,7 @@ public class BaitManager : IDisposable {
         Plugin.Framework.Update -= this.FrameworkUpdate;
     }
 
-    private unsafe void FrameworkUpdate(Framework framework) {
+    private unsafe void FrameworkUpdate(IFramework framework) {
         this.CurrentBait = *(uint*) this.currentBaitAddr;
 
         var tracker = Plugin.StateTracker;

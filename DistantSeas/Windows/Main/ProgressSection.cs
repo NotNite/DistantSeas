@@ -3,7 +3,8 @@ using System.Linq;
 using System.Numerics;
 using CheapLoc;
 using Dalamud.Interface;
-using Dalamud.Interface.Raii;
+using Dalamud.Interface.Utility;
+using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
 using DistantSeas.Core;
 using ImGuiNET;
@@ -88,7 +89,7 @@ public class ProgressSection : MainWindowSection {
         ImGui.TableNextColumn();
 
         var iconId = achievement.Icon;
-        var icon = Plugin.ImageCache.GetIcon(iconId);
+        var icon = Plugin.TextureProvider.GetIcon(iconId)!;
         var iconSize = ImGui.GetTextLineHeight();
         ImGui.Image(icon.ImGuiHandle, new Vector2(iconSize, iconSize));
         ImGui.TableNextColumn();
