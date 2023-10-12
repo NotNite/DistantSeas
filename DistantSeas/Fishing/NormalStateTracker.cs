@@ -153,4 +153,8 @@ public unsafe class NormalStateTracker : IStateTracker {
             }
         }
     }
+
+    public void ResetMissions() {
+        MissionState.Clear();
+    }
 }
