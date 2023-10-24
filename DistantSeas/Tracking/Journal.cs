@@ -158,6 +158,8 @@ public unsafe class Journal : IDisposable {
         this.missionTwo = 0;
         this.missionThree = 0;
         this.pollingForDataPopulation = false;
+
+        Plugin.StateTracker.ResetMissions();
     }
 
     // public for debugging purposes

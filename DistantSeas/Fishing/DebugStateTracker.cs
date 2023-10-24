@@ -38,4 +38,12 @@ public class DebugStateTracker : IStateTracker {
     }
 
     public void Dispose() { }
+
+    public void ResetMissions() {
+        MissionState = new() {
+            new MissionState(0),
+            new MissionState(0),
+            new MissionState(0)
+        };
+    }
 }

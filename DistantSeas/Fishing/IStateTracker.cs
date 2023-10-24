@@ -21,4 +21,5 @@ public interface IStateTracker : IDisposable {
     public bool IsActionReady(uint id);
     public uint GetStatusStacks(uint id);
     public int GetItemCount(uint id);
+    public void ResetMissions();
 }
