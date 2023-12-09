@@ -1,4 +1,4 @@
-﻿namespace DistantSeas.SpreadsheetSpaghetti.Types; 
+﻿namespace DistantSeas.Common; 
 
 public class Mooch {
     public uint? RequiredBait;

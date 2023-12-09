@@ -1,5 +1,5 @@
-﻿using DistantSeas.Fishing;
-using DistantSeas.SpreadsheetSpaghetti.Types;
+﻿using DistantSeas.Common;
+using DistantSeas.Fishing;
 
 namespace DistantSeas.Tracking.LogEntries;
 

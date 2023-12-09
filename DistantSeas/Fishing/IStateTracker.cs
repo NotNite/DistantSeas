@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DistantSeas.SpreadsheetSpaghetti.Types;
+using DistantSeas.Common;
 
 namespace DistantSeas.Fishing;
 

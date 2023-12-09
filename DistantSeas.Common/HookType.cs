@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace DistantSeas.SpreadsheetSpaghetti.Types;
+namespace DistantSeas.Common;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum HookType {

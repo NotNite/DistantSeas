@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <Version>1.0.0.3</Version>
+        <Version>1.0.0.4</Version>
         <TargetFramework>net7.0-windows</TargetFramework>
         <Platforms>x64</Platforms>
         <Nullable>enable</Nullable>
@@ -58,6 +58,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DistantSeas.SpreadsheetSpaghetti\DistantSeas.SpreadsheetSpaghetti.csproj"/>
+      <ProjectReference Include="..\DistantSeas.Common\DistantSeas.Common.csproj" />
     </ItemGroup>
 </Project>

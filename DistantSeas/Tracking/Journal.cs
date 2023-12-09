@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Dalamud.Game;
 using Dalamud.Hooking;
 using Dalamud.Plugin.Services;
 using Dalamud.Utility.Signatures;
-using DistantSeas.SpreadsheetSpaghetti;
-using DistantSeas.SpreadsheetSpaghetti.Types;
+using DistantSeas.Common;
 using DistantSeas.Tracking.LogEntries;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
-using Lumina.Excel.GeneratedSheets;
 
 // ReSharper disable InconsistentNaming
 
@@ -72,6 +69,7 @@ public unsafe class Journal : IDisposable {
         }
 
         var stateTracker = Plugin.StateTracker;
+        if (stateTracker is null) return;
         if (stateTracker.IsInOceanFishing) {
             var newPoints = stateTracker.Points;
             if (newPoints > this.points) {

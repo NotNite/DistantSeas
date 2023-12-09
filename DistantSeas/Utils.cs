@@ -1,15 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Numerics;
 using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Logging;
 using Dalamud.Utility;
-using DistantSeas.SpreadsheetSpaghetti.Types;
 using ImGuiNET;
 using Lumina.Excel.GeneratedSheets;
-using Range = DistantSeas.SpreadsheetSpaghetti.Types.Range;
+using DistantSeas.Common;
+using Range = DistantSeas.Common.Range;
 
 namespace DistantSeas;
 

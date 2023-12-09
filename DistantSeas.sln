@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantSeas", "DistantSeas\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantSeas.SpreadsheetSpaghetti", "DistantSeas.SpreadsheetSpaghetti\DistantSeas.SpreadsheetSpaghetti.csproj", "{1E36E321-707F-4C5E-ACD5-3A22C4BE9616}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantSeas.Common", "DistantSeas.Common\DistantSeas.Common.csproj", "{00EE5861-75BB-4D9E-923B-0687911A2750}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -25,6 +27,10 @@ Global
 		{1E36E321-707F-4C5E-ACD5-3A22C4BE9616}.Debug|x64.Build.0 = Debug|Any CPU
 		{1E36E321-707F-4C5E-ACD5-3A22C4BE9616}.Release|x64.ActiveCfg = Release|Any CPU
 		{1E36E321-707F-4C5E-ACD5-3A22C4BE9616}.Release|x64.Build.0 = Release|Any CPU
+		{00EE5861-75BB-4D9E-923B-0687911A2750}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{00EE5861-75BB-4D9E-923B-0687911A2750}.Debug|x64.Build.0 = Debug|Any CPU
+		{00EE5861-75BB-4D9E-923B-0687911A2750}.Release|x64.ActiveCfg = Release|Any CPU
+		{00EE5861-75BB-4D9E-923B-0687911A2750}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

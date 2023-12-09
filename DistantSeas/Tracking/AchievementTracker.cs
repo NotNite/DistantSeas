@@ -5,7 +5,7 @@ using System.Timers;
 using Dalamud.Hooking;
 using Dalamud.Logging;
 using Dalamud.Utility.Signatures;
-using DistantSeas.SpreadsheetSpaghetti;
+using DistantSeas.Common;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 namespace DistantSeas.Tracking;

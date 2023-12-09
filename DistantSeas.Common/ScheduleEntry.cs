@@ -1,4 +1,4 @@
-﻿namespace DistantSeas.SpreadsheetSpaghetti.Types; 
+﻿namespace DistantSeas.Common; 
 
 public record ScheduleEntry {
     public DateTime Date;

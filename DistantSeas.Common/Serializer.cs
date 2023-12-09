@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace DistantSeas.SpreadsheetSpaghetti;
+namespace DistantSeas.Common;
 
 public static class Serializer {
     private static JsonSerializerOptions Options = new() {

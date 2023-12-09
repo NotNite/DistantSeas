@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Dalamud.Logging;
-using DistantSeas.SpreadsheetSpaghetti;
-using DistantSeas.SpreadsheetSpaghetti.Types;
+using DistantSeas.Common;
 
 namespace DistantSeas.Fishing;
 

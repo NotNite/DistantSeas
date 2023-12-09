@@ -21,9 +21,13 @@
           "Lumina": "3.10.0"
         }
       },
+      "distantseas.common": {
+        "type": "Project"
+      },
       "distantseas.spreadsheetspaghetti": {
         "type": "Project",
         "dependencies": {
+          "DistantSeas.Common": "[1.0.0, )",
           "Lumina": "[3.10.2, )",
           "Lumina.Excel": "[6.4.0, )"
         }

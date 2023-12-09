@@ -6,8 +6,8 @@ using Dalamud.Interface;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Logging;
+using DistantSeas.Common;
 using DistantSeas.Core;
-using DistantSeas.SpreadsheetSpaghetti;
 using DistantSeas.Tracking;
 using DistantSeas.Tracking.LogEntries;
 using ImGuiNET;
@@ -107,6 +107,7 @@ public class JournalSection : MainWindowSection {
 
     private void UpdateJournalEntries() {
         var path = Plugin.ResourceManager.GetConfigPath("logs");
+        if (!Directory.Exists(path)) return;
         var files = Directory.GetFiles(path);
 
         var newEntries = new List<JournalEntryInfo>();

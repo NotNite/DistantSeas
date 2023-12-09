@@ -5,8 +5,8 @@ using System.Linq;
 using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
+using DistantSeas.Common;
 using DistantSeas.Core;
-using DistantSeas.SpreadsheetSpaghetti.Types;
 using ImGuiNET;
 
 namespace DistantSeas.Windows.Main;

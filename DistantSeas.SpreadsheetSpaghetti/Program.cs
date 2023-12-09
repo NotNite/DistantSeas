@@ -1,9 +1,9 @@
 ﻿using System.Text.RegularExpressions;
+using DistantSeas.Common;
 using DistantSeas.SpreadsheetSpaghetti;
-using DistantSeas.SpreadsheetSpaghetti.Types;
 using Lumina;
 using Lumina.Excel.GeneratedSheets;
-using Range = DistantSeas.SpreadsheetSpaghetti.Types.Range;
+using Range = DistantSeas.Common.Range;
 
 // not exhaustive because of an "unnamed enum value", what the fuck are you on
 #pragma warning disable CS8524

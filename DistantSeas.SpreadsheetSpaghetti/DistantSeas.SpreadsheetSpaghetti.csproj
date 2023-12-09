@@ -19,4 +19,9 @@
       </Reference>
     </ItemGroup>
 
+
+    <ItemGroup>
+      <ProjectReference Include="..\DistantSeas.Common\DistantSeas.Common.csproj" />
+    </ItemGroup>
+
 </Project>

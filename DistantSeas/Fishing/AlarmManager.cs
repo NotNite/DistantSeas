@@ -1,8 +1,7 @@
 ﻿using System;
 using CheapLoc;
-using Dalamud.Game;
 using Dalamud.Plugin.Services;
-using DistantSeas.SpreadsheetSpaghetti.Types;
+using DistantSeas.Common;
 using FFXIVClientStructs.FFXIV.Client.UI;
 
 namespace DistantSeas.Fishing;
