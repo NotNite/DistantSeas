@@ -48,7 +48,7 @@ public unsafe class AchievementTracker : IDisposable {
     public void Dispose() {
         this.ReceiveAchievementProgressHook.Dispose();
         this.achievementTimer.Dispose();
-        Plugin.ClientState.Logout += this.OnLogout;
+        Plugin.ClientState.Logout -= this.OnLogout;
     }
 
     private void OnLogout() {
