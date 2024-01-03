@@ -15,6 +15,7 @@ public unsafe class AchievementTracker : IDisposable {
     private AchievementState? cachedState;
     private Timer achievementTimer;
     private const uint OnABoatFive = 2758;
+    public const uint OnABoatFiveGoal = 3_000_000;
 
     public delegate void ReceiveAchievementProgressDelegate(Achievement* achievement, uint id, uint current, uint max);
 
@@ -32,6 +33,7 @@ public unsafe class AchievementTracker : IDisposable {
         this.ReceiveAchievementProgressHook.Enable();
 
         for (uint i = 2553; i <= 2566; i++) this.Achievements.Add(i);
+        for (uint i = 2603; i <= 2606; i++) this.Achievements.Add(i);
         for (uint i = 2748; i <= 2759; i++) this.Achievements.Add(i);
         for (uint i = 3256; i <= 3269; i++) this.Achievements.Add(i);
 
@@ -39,11 +41,18 @@ public unsafe class AchievementTracker : IDisposable {
         this.achievementTimer.AutoReset = true;
         this.achievementTimer.Elapsed += (_, _) => this.UpdateAchievements();
         this.achievementTimer.Start();
+
+        Plugin.ClientState.Logout += this.OnLogout;
     }
 
     public void Dispose() {
         this.ReceiveAchievementProgressHook.Dispose();
         this.achievementTimer.Dispose();
+        Plugin.ClientState.Logout += this.OnLogout;
+    }
+
+    private void OnLogout() {
+        this.cachedState = null;
     }
 
     private string GetFilePath() {
@@ -84,7 +93,8 @@ public unsafe class AchievementTracker : IDisposable {
         if (id == OnABoatFive) {
             try {
                 var state = this.GetAchievementState();
-                state.TotalPoints = current;
+                // Server only sends us up to the goal so it'll reset to 3 mil if we go higher
+                if (current < OnABoatFiveGoal) state.TotalPoints = current;
                 state.IsPointsDirty = false;
                 this.WriteAchievementState(state);
             } catch (Exception e) {
