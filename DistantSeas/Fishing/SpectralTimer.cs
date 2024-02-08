@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Timers;
 using Dalamud.Plugin.Services;
-using DistantSeas.Tracking.LogEntries;
 
-namespace DistantSeas.Tracking;
+namespace DistantSeas.Fishing;
 
 public class SpectralTimer {
     private bool spectral = false;
