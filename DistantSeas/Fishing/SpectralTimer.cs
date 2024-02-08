@@ -15,7 +15,6 @@ public class SpectralTimer {
 
     public uint timer = SPECTRAL_TIME;
     public SpectralTimer() {
-        Plugin.GameInteropProvider.InitializeFromAttributes(this);
         stopwatch = new Timer(1000);
         stopwatch.Elapsed += OnTimedEvent;
         stopwatch.AutoReset = true;
