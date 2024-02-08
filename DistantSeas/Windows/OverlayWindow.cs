@@ -133,7 +133,7 @@ public class OverlayWindow : DistantSeasWindow {
 
         // Spectral time remaining
         if (tracker.IsSpectralActive) {
-            var specTime = Plugin.SpectralTimer.timer;
+            var specTime = Plugin.SpectralTimer.Timer;
             var specTimeHuman = $"{(int) specTime / 60}:{(int) specTime % 60:00}";
             if (specTime <= 0) specTimeHuman = "0:00";
             Utils.IconText(FontAwesomeIcon.WandMagicSparkles, specTimeHuman);
