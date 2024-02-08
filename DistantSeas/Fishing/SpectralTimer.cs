@@ -15,7 +15,8 @@ public class SpectralTimer {
         stopwatch = new Timer(1000);
         stopwatch.Elapsed += OnTimedEvent;
         stopwatch.AutoReset = true;
-        
+
+        Plugin.EnteredOceanFishing += this.EnteredOceanFishing;
         Plugin.Framework.Update += this.FrameworkUpdate;
     }
     
@@ -27,7 +28,12 @@ public class SpectralTimer {
     
     public void Dispose() {
         stopwatch.Close();
+        Plugin.EnteredOceanFishing -= this.EnteredOceanFishing;
         Plugin.Framework.Update -= this.FrameworkUpdate;
+    }
+    
+    private void EnteredOceanFishing() {
+        this.Timer = SpectralTime; //new voyage, spectral timer is set to 2 minutes
     }
     
     /*
@@ -55,9 +61,6 @@ public class SpectralTimer {
         if (stateTracker.IsInOceanFishing) {
             if (Plugin.StateTracker.IsDataLoaded) {
                 var newZone = stateTracker.CurrentZone;
-                if (newZone == 0) { //new voyage, timer is set to 2 minutes
-                    this.Timer = SpectralTime;
-                }
                 
                 if (newZone != this.zone) {
                     this.zone = newZone;
@@ -72,6 +75,10 @@ public class SpectralTimer {
                 this.spectral = newSpectral;
 
                 if (this.spectral) {
+                    //spec will auto stop when 30s remain on the instance timer
+                    if((stateTracker.TimeLeftInZone - 30) < this.Timer) {
+                        this.Timer = (uint) (stateTracker.TimeLeftInZone - 30);
+                    }
                     stopwatch.Start();
                     this.lastZoneHadSpectral = true;
 
