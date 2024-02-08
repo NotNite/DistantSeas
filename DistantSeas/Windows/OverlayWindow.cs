@@ -136,7 +136,7 @@ public class OverlayWindow : DistantSeasWindow {
             var specTime = Plugin.SpectralTimer.timer;
             var specTimeHuman = $"{(int) specTime / 60}:{(int) specTime % 60:00}";
             if (specTime <= 0) specTimeHuman = "0:00";
-            Utils.IconText(FontAwesomeIcon.Clock, specTimeHuman);
+            Utils.IconText(FontAwesomeIcon.WandMagicSparkles, specTimeHuman);
             Utils.VerticalSeparator();
         }
 
