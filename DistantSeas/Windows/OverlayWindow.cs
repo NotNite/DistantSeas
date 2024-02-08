@@ -102,6 +102,10 @@ public class OverlayWindow : DistantSeasWindow {
         try {
             this.DrawHeader();
 
+            if (Plugin.Configuration.OnlyDrawHeader) {
+                return;
+            }
+
             ImGui.Separator();
 
             if (Plugin.Configuration.DrawVoyageMissions) {

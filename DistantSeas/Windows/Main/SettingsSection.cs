@@ -132,6 +132,10 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsHideVanillaOverlay", "Hide original overlay"),
             ref Plugin.Configuration.HideVanillaOverlay
         );
+        ImGui.Checkbox(
+            Loc.Localize("SettingsOnlyShowHeader", "Only Show Header"),
+            ref Plugin.Configuration.OnlyDrawHeader
+        );
         ImGuiComponents.HelpMarker(
             Loc.Localize("SettingsHideVanillaOverlayDescription",
                          "Hides the base game fishing log and voyage missions.")
