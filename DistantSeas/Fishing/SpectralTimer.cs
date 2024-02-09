@@ -83,6 +83,8 @@ public class SpectralTimer {
                     if((stateTracker.TimeLeftInZone - 30) < this.Timer) {
                         this.extraTime = (uint) (this.Timer - (stateTracker.TimeLeftInZone - 30));
                         this.Timer = (uint) (stateTracker.TimeLeftInZone - 30);
+                    } else {
+                        this.extraTime = 0;
                     }
                     stopwatch.Start();
                     this.lastZoneHadSpectral = true;
