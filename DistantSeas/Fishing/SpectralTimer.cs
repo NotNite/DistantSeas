@@ -11,6 +11,7 @@ public class SpectralTimer {
     private bool lastZoneHadSpectral;
     private static Timer stopwatch;
     public uint Timer = SpectralTime;
+    private uint extraTime = 0;
     public SpectralTimer() {
         stopwatch = new Timer(1000);
         stopwatch.Elapsed += OnTimedEvent;
@@ -34,6 +35,9 @@ public class SpectralTimer {
     
     private void EnteredOceanFishing() {
         this.Timer = SpectralTime; //new voyage, spectral timer is set to 2 minutes
+        this.lastZoneHadSpectral = false; 
+        extraTime = 0;
+
     }
     
     /*
@@ -77,6 +81,7 @@ public class SpectralTimer {
                 if (this.spectral) {
                     //spec will auto stop when 30s remain on the instance timer
                     if((stateTracker.TimeLeftInZone - 30) < this.Timer) {
+                        this.extraTime = (uint) (this.Timer - (stateTracker.TimeLeftInZone - 30));
                         this.Timer = (uint) (stateTracker.TimeLeftInZone - 30);
                     }
                     stopwatch.Start();
@@ -84,7 +89,7 @@ public class SpectralTimer {
 
                 } else {
                     stopwatch.Stop();
-                    this.Timer = Math.Min(SpectralTime + this.Timer, 3 * 60);
+                    this.Timer = Math.Min(SpectralTime + this.extraTime, 3 * 60);
                 }
                 
             }
