@@ -13,6 +13,7 @@ using Dalamud.Logging;
 using Dalamud.Utility;
 using DistantSeas.Common;
 using DistantSeas.Core;
+using DistantSeas.Tracking;
 using ImGuiNET;
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
@@ -101,6 +102,10 @@ public class OverlayWindow : DistantSeasWindow {
         try {
             this.DrawHeader();
 
+            if (Plugin.Configuration.OnlyDrawHeader) {
+                return;
+            }
+
             ImGui.Separator();
 
             if (Plugin.Configuration.DrawVoyageMissions) {
@@ -124,14 +129,24 @@ public class OverlayWindow : DistantSeasWindow {
     }
 
     private void DrawHeader() {
-        // Time remaining
         var tracker = Plugin.StateTracker;
+
+        // Spectral time remaining
+        if (tracker.IsSpectralActive) {
+            var specTime = Plugin.SpectralTimer.Timer;
+            var specTimeHuman = $"{(int) specTime / 60}:{(int) specTime % 60:00}";
+            if (specTime <= 0) specTimeHuman = "0:00";
+            Utils.IconText(FontAwesomeIcon.WandMagicSparkles, specTimeHuman);
+            Utils.VerticalSeparator();
+        }
+
+        // Time remaining
         var zoneTime = tracker.TimeLeftInZone;
         var timeStr = $"{(int) zoneTime / 60}:{(int) zoneTime % 60:00}";
         if (zoneTime < 0) timeStr = "0:00";
         Utils.IconText(FontAwesomeIcon.Clock, timeStr);
         Utils.VerticalSeparator();
-
+        
         // Points
         ImGui.TextUnformatted($"{tracker.Points}pts");
         Utils.VerticalSeparator();

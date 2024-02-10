@@ -44,6 +44,7 @@ public sealed class Plugin : IDalamudPlugin {
     public static BaitManager BaitManager = null!;
     public static AlarmManager AlarmManager = null!;
     public static Journal Journal = null!;
+    public static SpectralTimer SpectralTimer = null!;
     public static AchievementTracker AchievementTracker = null!;
 
     public static Configuration Configuration = null!;
@@ -66,6 +67,7 @@ public sealed class Plugin : IDalamudPlugin {
         LocalizationManager = new LocalizationManager();
         FishData = new FishData();
         BaitManager = new BaitManager();
+        SpectralTimer = new SpectralTimer();
         AlarmManager = new AlarmManager();
 
         WindowManager = new WindowManager();
@@ -91,6 +93,7 @@ public sealed class Plugin : IDalamudPlugin {
         AchievementTracker.Dispose();
         AlarmManager.Dispose();
         BaitManager.Dispose();
+        SpectralTimer.Dispose();
 
         HeaderFontHandle.Dispose();
     }

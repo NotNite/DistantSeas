@@ -136,7 +136,10 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsHideVanillaOverlayDescription",
                          "Hides the base game fishing log and voyage missions.")
         );
-
+        ImGui.Checkbox(
+            Loc.Localize("SettingsOnlyShowHeader", "Only Show Overlay Header"),
+            ref Plugin.Configuration.OnlyDrawHeader
+        );
         ImGui.Checkbox(
             Loc.Localize("SettingsScrollFish", "Add scrollbar to fish"),
             ref Plugin.Configuration.ScrollFish
