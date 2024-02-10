@@ -137,7 +137,7 @@ public class SettingsSection : MainWindowSection {
                          "Hides the base game fishing log and voyage missions.")
         );
         ImGui.Checkbox(
-            Loc.Localize("SettingsOnlyShowHeader", "Only Show Overlay Header"),
+            Loc.Localize("SettingsOnlyShowHeader", "Only show overlay header"),
             ref Plugin.Configuration.OnlyDrawHeader
         );
         ImGui.Checkbox(
