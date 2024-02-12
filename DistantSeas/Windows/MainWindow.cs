@@ -23,6 +23,11 @@ public class MainWindow : DistantSeasWindow {
                         .Where(x => x.Category != MainWindowCategory.Debug)
 #endif
                         .ToList();
+
+        this.SizeConstraints = new WindowSizeConstraints() {
+            MinimumSize = new Vector2(300, 300),
+            MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
+        };
     }
 
     public override void Dispose() {
