@@ -31,7 +31,7 @@ public class SchedulesSection : MainWindowSection {
                     | ImGuiTableFlags.Resizable
                     | ImGuiTableFlags.ScrollY
                     | ImGuiTableFlags.RowBg;
-        
+
         if (ImGui.Combo(
                 Loc.Localize("SchedulesSectionRoute", "Route"),
                 ref this.routeType,
@@ -51,29 +51,31 @@ public class SchedulesSection : MainWindowSection {
             if (this.count < 1) this.count = 1;
             if (this.count > this.schedules!.Count) this.count = this.schedules.Count;
         }
-        
+
         var clippedSchedules = this.schedules!.Take(this.count).ToList();
-        using (ImRaii.Table("##DistantSeasSchedule", 3, flags)) {
-            ImGui.TableSetupColumn(Loc.Localize("SchedulesSectionRoute", "Route"));
-            ImGui.TableSetupColumn(Loc.Localize("SchedulesSectionTime", "Time"));
-            ImGui.TableSetupColumn(Loc.Localize("SchedulesSectionDate", "Date"));
+        using (var tbl = ImRaii.Table("##DistantSeasSchedule", 3, flags)) {
+            if (tbl.Success) {
+                ImGui.TableSetupColumn(Loc.Localize("SchedulesSectionRoute", "Route"));
+                ImGui.TableSetupColumn(Loc.Localize("SchedulesSectionTime", "Time"));
+                ImGui.TableSetupColumn(Loc.Localize("SchedulesSectionDate", "Date"));
 
-            ImGui.TableHeadersRow();
+                ImGui.TableHeadersRow();
 
-            foreach (var schedule in clippedSchedules) {
-                ImGui.TableNextRow();
-                ImGui.TableNextColumn();
+                foreach (var schedule in clippedSchedules) {
+                    ImGui.TableNextRow();
+                    ImGui.TableNextColumn();
 
-                ImGui.TextUnformatted(Utils.SpotTypeName(schedule.Destination));
-                ImGui.TableNextColumn();
+                    ImGui.TextUnformatted(Utils.SpotTypeName(schedule.Destination));
+                    ImGui.TableNextColumn();
 
-                ImGui.TextUnformatted(Utils.TimeName(schedule.Time));
-                ImGui.TableNextColumn();
+                    ImGui.TextUnformatted(Utils.TimeName(schedule.Time));
+                    ImGui.TableNextColumn();
 
-                var inLocalTz = schedule.Date.ToLocalTime();
-                var relativeDate = this.BuildRelativeDate(inLocalTz);
-                ImGui.TextUnformatted(relativeDate);
-                if (ImGui.IsItemHovered()) ImGui.SetTooltip(inLocalTz.ToString(CultureInfo.CurrentCulture));
+                    var inLocalTz = schedule.Date.ToLocalTime();
+                    var relativeDate = this.BuildRelativeDate(inLocalTz);
+                    ImGui.TextUnformatted(relativeDate);
+                    if (ImGui.IsItemHovered()) ImGui.SetTooltip(inLocalTz.ToString(CultureInfo.CurrentCulture));
+                }
             }
         }
     }

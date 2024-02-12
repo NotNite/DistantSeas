@@ -24,10 +24,8 @@ public class MainWindow : DistantSeasWindow {
 #endif
                         .ToList();
 
-        this.SizeConstraints = new WindowSizeConstraints() {
-            MinimumSize = new Vector2(300, 300),
-            MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
-        };
+        this.SizeCondition = ImGuiCond.FirstUseEver;
+        this.Size = new Vector2(600, 400);
     }
 
     public override void Dispose() {
