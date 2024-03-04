@@ -45,36 +45,36 @@ public class ProgressSection : MainWindowSection {
                                "Looks wrong? Open the Achievements menu to sync completion state, and select On a Boat V to sync total points.");
         ImGuiHelpers.CenteredText(str);
 
+        const ImGuiTableFlags flags = ImGuiTableFlags.Borders
+                    | ImGuiTableFlags.SizingFixedFit
+                    | ImGuiTableFlags.ScrollY
+                    | ImGuiTableFlags.RowBg;
+
+        using var table = ImRaii.Table("##DistantSeasProgress", 4, flags);
+        if (!table.Success) return;
+        
+        ImGui.TableSetupColumn(Loc.Localize("ProgressSectionCompleted", "Completed"));
+        ImGui.TableSetupColumn(Loc.Localize("ProgressSectionIcon", "Icon"));
+        ImGui.TableSetupColumn(Loc.Localize("ProgressSectionName", "Name"));
+        ImGui.TableSetupColumn(Loc.Localize("ProgressSectionDescription", "Description"));
+        ImGui.TableHeadersRow();
+        
         var achievements = Plugin.AchievementTracker.Achievements
                                  .Select(x => this.achievementSheet.GetRow(x)!)
                                  .OrderBy(x => x.Name.ToDalamudString().TextValue)
                                  .ToList();
 
-        var flags = ImGuiTableFlags.Borders
-                    | ImGuiTableFlags.SizingFixedFit
-                    | ImGuiTableFlags.ScrollY
-                    | ImGuiTableFlags.RowBg;
+        foreach (var achievement in achievements) {
+            ImGui.TableNextRow();
+            ImGui.TableNextColumn();
 
+            var completed = state.CompletedAchievements.GetValueOrDefault(achievement.RowId);
 
-        using (ImRaii.Table("##DistantSeasProgress", 4, flags)) {
-            ImGui.TableSetupColumn(Loc.Localize("ProgressSectionCompleted", "Completed"));
-            ImGui.TableSetupColumn(Loc.Localize("ProgressSectionIcon", "Icon"));
-            ImGui.TableSetupColumn(Loc.Localize("ProgressSectionName", "Name"));
-            ImGui.TableSetupColumn(Loc.Localize("ProgressSectionDescription", "Description"));
-            ImGui.TableHeadersRow();
-
-            foreach (var achievement in achievements) {
-                ImGui.TableNextRow();
-                ImGui.TableNextColumn();
-
-                var completed = state.CompletedAchievements.GetValueOrDefault(achievement.RowId);
-
-                if (completed) {
+            if (completed) {
+                this.DrawAchievement(achievement, completed);
+            } else {
+                using (ImRaii.PushColor(ImGuiCol.Text, ImGui.GetColorU32(ImGuiCol.TextDisabled))) {
                     this.DrawAchievement(achievement, completed);
-                } else {
-                    using (ImRaii.PushColor(ImGuiCol.Text, ImGui.GetColorU32(ImGuiCol.TextDisabled))) {
-                        this.DrawAchievement(achievement, completed);
-                    }
                 }
             }
         }
