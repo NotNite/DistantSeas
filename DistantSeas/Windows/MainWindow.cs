@@ -32,6 +32,10 @@ public class MainWindow : DistantSeasWindow {
         this.sections.ForEach(x => x.Dispose());
     }
 
+    public override void OnClose() {
+        Plugin.Configuration.Save();
+    }
+
     public override void Draw() {
         this.DrawSidebar();
 
