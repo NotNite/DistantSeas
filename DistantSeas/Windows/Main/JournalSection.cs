@@ -123,7 +123,7 @@ public class JournalSection : MainWindowSection {
                     newEntries.Add(entryInfo);
                 }
             } catch (Exception e) {
-                PluginLog.Error(e, "Failed to read journal file {File}", file);
+                Plugin.PluginLog.Error(e, "Failed to read journal file {File}", file);
             }
         }
 

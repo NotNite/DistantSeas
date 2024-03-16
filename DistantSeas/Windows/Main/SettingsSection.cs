@@ -16,11 +16,11 @@ public class SettingsSection : MainWindowSection {
         Loc.Localize("SettingsSection", "Settings"),
         MainWindowCategory.None
     ) { }
-
+    
     public override void Draw() {
         this.DrawLanguageSelector();
         ImGui.NewLine();
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsShowOverlay", "Show overlay"),
             ref Plugin.Configuration.ShowOverlay
@@ -29,7 +29,7 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsShowOverlayDescription",
                          "When in Ocean Fishing, draws an overlay with information about your current boat.")
         );
-
+        
         using (ImRaii.PushIndent()) {
             if (Plugin.Configuration.ShowOverlay) {
                 this.DrawOverlaySettings();
@@ -39,9 +39,9 @@ public class SettingsSection : MainWindowSection {
                 }
             }
         }
-
+        
         ImGui.NewLine();
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsAlarmEnabled", "Enable alarm"),
             ref Plugin.Configuration.AlarmEnabled
@@ -50,7 +50,7 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsAlarmEnabledDescription",
                          "Posts a message in chat (and optionally plays a sound) before the next boat.")
         );
-
+        
         using (ImRaii.PushIndent()) {
             if (Plugin.Configuration.AlarmEnabled) {
                 this.DrawAlarmSettings();
@@ -60,9 +60,9 @@ public class SettingsSection : MainWindowSection {
                 }
             }
         }
-
+        
         ImGui.NewLine();
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsJournalEnabled", "Enable journal"),
             ref Plugin.Configuration.JournalEnabled
@@ -71,9 +71,9 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsJournalEnabledDescription",
                          "Saves a log of each boat you're on. Disabling this will not remove old logs.")
         );
-
+        
         ImGui.NewLine();
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsOceanFishingBaitsOnly", "Prefer Ocean Fishing baits"),
             ref Plugin.Configuration.OceanFishingBaitsOnly
@@ -82,7 +82,7 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsOceanFishingBaitsOnlyDescription",
                          "Prefers Ragworm, Krill, and Plump Worm as baits when possible.")
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsPreferDynamicSuggestions", "Prefer dynamic suggestions"),
             ref Plugin.Configuration.PreferDynamicSuggestions
@@ -92,19 +92,19 @@ public class SettingsSection : MainWindowSection {
                          "Use bait with the least bite time overlap instead of community-defined baits. Will likely be less accurate.")
         );
     }
-
+    
     private void DrawLanguageSelector() {
         var strs = new List<string> {
                 Loc.Localize("SettingsUseDalamudLanguage", "Use Dalamud language")
             }.Concat(LocalizationManager.CodesToNames.Values)
              .ToList();
-
+        
         var pos = Plugin.Configuration.LanguageOverride == null
                       ? 0
                       : strs.IndexOf(
                           LocalizationManager.CodesToNames[Plugin.Configuration.LanguageOverride]
                       );
-
+        
         if (ImGui.Combo(
                 Loc.Localize("SettingsLanguageOverride", "Language"),
                 ref pos,
@@ -117,17 +117,17 @@ public class SettingsSection : MainWindowSection {
                 var key = LocalizationManager.CodesToNames.First(x => x.Value == strs[pos]).Key;
                 Plugin.Configuration.LanguageOverride = key;
             }
-
+            
             Plugin.LocalizationManager.Setup();
         }
     }
-
+    
     private void DrawOverlaySettings() {
         ImGui.Checkbox(
             Loc.Localize("SettingsLockOverlay", "Lock overlay"),
             ref Plugin.Configuration.LockOverlay
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsHideVanillaOverlay", "Hide original overlay"),
             ref Plugin.Configuration.HideVanillaOverlay
@@ -144,7 +144,7 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsScrollFish", "Add scrollbar to fish"),
             ref Plugin.Configuration.ScrollFish
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsSortFish", "Group fish by type"),
             ref Plugin.Configuration.SortFish
@@ -153,27 +153,27 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsSortFishDescription",
                          "Groups fish into tabs.")
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsDrawVoyageMissions", "Show voyage missions"),
             ref Plugin.Configuration.DrawVoyageMissions
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsHideFinishedMissions", "Hide finished voyage missions"),
             ref Plugin.Configuration.HideFinishedMissions
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsDrawFishNames", "Show fish names"),
             ref Plugin.Configuration.DrawFishNames
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsDrawFishRanges", "Show fish bite times"),
             ref Plugin.Configuration.DrawFishRanges
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsDrawIntTimes", "Show intuition durations"),
             ref Plugin.Configuration.DrawIntTimes
@@ -182,7 +182,7 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsDrawIntTimesDescription",
                          "For fish that require intuition to be caught, shows the intuition's duration next to their icons.")
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsDrawFishPoints", "Show average points of fish"),
             ref Plugin.Configuration.DrawFishPoints
@@ -191,7 +191,7 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsDrawFishPointsDescription",
                          "Draws the maximum points that can be obtained from each fish. This is calculated by the maximum yield of fish multiplied by the average points.")
         );
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsDrawSpectralColors", "Change color in spectral currents"),
             ref Plugin.Configuration.DrawSpectralColors
@@ -200,11 +200,16 @@ public class SettingsSection : MainWindowSection {
             Loc.Localize("SettingsDrawSpectralColorsDescription",
                          "Visually indicate you are in a spectral current by tinting the background color blue.")
         );
+        
+        ImGui.Checkbox(
+            Loc.Localize("SettingsResizingOverlay", "Enable resizing overlay"),
+            ref Plugin.Configuration.ResizingOverlay
+        );
     }
-
+    
     private void DrawAlarmSettings() {
         var width = 100 * ImGuiHelpers.GlobalScale;
-
+        
         ImGui.PushItemWidth(width);
         ImGui.SliderInt(
             Loc.Localize("SettingsAlarmMinutes", "Minutes before to trigger"),
@@ -213,12 +218,12 @@ public class SettingsSection : MainWindowSection {
             60
         );
         ImGui.PopItemWidth();
-
+        
         ImGui.Checkbox(
             Loc.Localize("SettingsAlarmSoundEnabled", "Play sound"),
             ref Plugin.Configuration.AlarmSoundEnabled
         );
-
+        
         ImGui.PushItemWidth(width);
         var sound = Plugin.Configuration.AlarmSound;
         var soundStr = Loc.Localize("SettingsAlarmSound", "Sound");

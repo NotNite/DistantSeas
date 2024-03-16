@@ -168,7 +168,7 @@ public class FishData {
             }
         }
 
-        PluginLog.Warning("Ran out of routes in FishData#GetNextRouteTime");
+        Plugin.PluginLog.Warning("Ran out of routes in FishData#GetNextRouteTime");
         return null!;
     }
 

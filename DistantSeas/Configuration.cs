@@ -16,6 +16,7 @@ public class Configuration : IPluginConfiguration {
     [JsonProperty] public bool HideVanillaOverlay = false;
     [JsonProperty] public bool ScrollFish = true;
     [JsonProperty] public bool SortFish = true;
+    [JsonProperty] public bool ResizingOverlay = false;
 
     [JsonProperty] public bool DrawVoyageMissions = true;
     [JsonProperty] public bool HideFinishedMissions = false;

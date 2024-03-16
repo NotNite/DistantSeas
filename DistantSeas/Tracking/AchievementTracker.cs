@@ -98,7 +98,7 @@ public unsafe class AchievementTracker : IDisposable {
                 state.IsPointsDirty = false;
                 this.WriteAchievementState(state);
             } catch (Exception e) {
-                PluginLog.Error("Error receiving achievement progress: {e}", e);
+                Plugin.PluginLog.Error("Error receiving achievement progress: {e}", e);
             }
         }
 
@@ -119,7 +119,7 @@ public unsafe class AchievementTracker : IDisposable {
                 var state = this.GetAchievementState();
                 state.CompletedAchievements = states;
                 this.WriteAchievementState(state);
-                PluginLog.Debug("Wrote achievements");
+                Plugin.PluginLog.Debug("Wrote achievements");
             }
         }
     }

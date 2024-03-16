@@ -169,22 +169,22 @@ public class BaitManager : IDisposable {
 
     public void SetCurrentBait(uint id) {
         if (Plugin.StateTracker.GetItemCount(id) <= 0) {
-            PluginLog.Debug("Tried to set bait to {BaitId}, but has none!", id);
+            Plugin.PluginLog.Debug("Tried to set bait to {BaitId}, but has none!", id);
             return;
         }
 
         if (!this.CanChangeBait()) {
-            PluginLog.Debug("Tried to set bait to {BaitId}, but can't!", id);
+            Plugin.PluginLog.Debug("Tried to set bait to {BaitId}, but can't!", id);
             return;
         }
 
         if (!Utils.IsBait(id)) {
-            PluginLog.Debug("Tried to set bait to {BaitId}, but it's not bait!", id);
+            Plugin.PluginLog.Debug("Tried to set bait to {BaitId}, but it's not bait!", id);
             return;
         }
 
         if (this.CurrentBait == id) {
-            PluginLog.Debug("Tried to set bait to {BaitId}, but it's already our bait!", id);
+            Plugin.PluginLog.Debug("Tried to set bait to {BaitId}, but it's already our bait!", id);
             return;
         }
 

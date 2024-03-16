@@ -36,7 +36,7 @@ public class WindowManager : IDisposable {
             if (window is T w) return w;
         }
 
-        PluginLog.Warning("Window not found?: {0}", typeof(T).Name);
+        Plugin.PluginLog.Warning("Window not found?: {0}", typeof(T).Name);
         return null!;
     }
 
