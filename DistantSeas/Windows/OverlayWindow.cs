@@ -2,48 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Timers;
 using CheapLoc;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Logging;
 using Dalamud.Utility;
 using DistantSeas.Common;
 using DistantSeas.Core;
-using DistantSeas.Tracking;
+using DistantSeas.Fishing;
 using ImGuiNET;
-using Lumina.Excel;
-using Lumina.Excel.GeneratedSheets;
 
 namespace DistantSeas.Windows;
 
 public class OverlayWindow : DistantSeasWindow {
-    private ExcelSheet<IKDRoute> ikdRouteSheet;
-    private ExcelSheet<IKDSpot> ikdSpotSheet;
-    private ExcelSheet<Item> itemSheet;
     private bool tinting;
     
-    private Timer fishTimer;
-    private Spot? spot;
-    private List<Fish>? availableFish;
-    private List<Fish>? voyageFish;
+    private readonly FishRaii raii;
     
     public OverlayWindow() : base("Distant Seas Overlay") {
-        this.ikdRouteSheet = Plugin.DataManager.Excel.GetSheet<IKDRoute>()!;
-        this.ikdSpotSheet = Plugin.DataManager.Excel.GetSheet<IKDSpot>()!;
-        this.itemSheet = Plugin.DataManager.Excel.GetSheet<Item>()!;
-        
-        this.fishTimer = new Timer(1000);
-        this.fishTimer.AutoReset = true;
-        this.fishTimer.Elapsed += (_, _) => this.UpdateFish();
-        this.fishTimer.Start();
+        this.raii = new FishRaii();
     }
     
     public override void Dispose() {
-        this.fishTimer.Dispose();
+        this.raii.Dispose();
     }
     
     public override void PreDraw() {
@@ -77,6 +60,7 @@ public class OverlayWindow : DistantSeasWindow {
     
     public override void PreOpenCheck() {
         this.IsOpen = this.ShouldDraw();
+        this.raii.Enabled = this.IsOpen;
     }
     
     private bool ShouldDraw() {
@@ -84,17 +68,6 @@ public class OverlayWindow : DistantSeasWindow {
                && Plugin.StateTracker.IsDataLoaded
                && Plugin.Configuration.ShowOverlay
                && !Plugin.Condition[ConditionFlag.OccupiedInCutSceneEvent];
-    }
-    
-    private void UpdateFish() {
-        if (this.ShouldDraw()) {
-            this.spot = Plugin.BaitManager.GetCurrentSpot();
-            this.availableFish = Plugin.BaitManager.GetAvailableFish();
-            
-            var missionState = Plugin.StateTracker.MissionState;
-            this.voyageFish = Plugin.FishData.FilterForVoyageMission(
-                availableFish, missionState).ToList();
-        }
     }
     
     public override void Draw() {
@@ -156,9 +129,8 @@ public class OverlayWindow : DistantSeasWindow {
         var toUseColor = isOverriden ? overrideColor : textColor;
         
         // Time of day and zone
-        var currentRoute = this.ikdRouteSheet.GetRow(tracker.CurrentRoute)!;
-        var currentZoneInfo = currentRoute.UnkData0[Plugin.BaitManager.CurrentZone];
-        var currentZone = this.ikdSpotSheet.GetRow(currentZoneInfo.Spot)!;
+        var currentZoneInfo = this.raii.GetCurrentZoneInfo();
+        var currentZone = this.raii.GetZoneFrom(currentZoneInfo);
         
         var zoneSpot = Plugin.StateTracker.IsSpectralActive
                            ? currentZone.SpotSub.Value!
@@ -203,7 +175,7 @@ public class OverlayWindow : DistantSeasWindow {
                     
                     if (ImGui.Selectable(string.Format(zoneText, i + 1), selected)) {
                         Plugin.BaitManager.OverrideZone = (uint) i;
-                        this.UpdateFish();
+                        this.raii.Update();
                     }
                 }
             }
@@ -212,9 +184,8 @@ public class OverlayWindow : DistantSeasWindow {
         Utils.VerticalSeparator();
         
         // Current bait
-        var currentBait = Plugin.BaitManager.CurrentBait;
-        if (currentBait != 0) {
-            var baitItem = this.itemSheet.GetRow(currentBait)!;
+        var baitItem = this.raii.GetCurrentBaitItem();
+        if (baitItem != null) {
             var baitIcon = Plugin.TextureProvider.GetIcon(baitItem.Icon)!;
             
             var lineHeight = ImGui.GetTextLineHeight();
@@ -241,45 +212,37 @@ public class OverlayWindow : DistantSeasWindow {
     }
     
     private void DrawFish() {
-        if (this.spot == null || this.availableFish == null || this.voyageFish == null) {
-            this.UpdateFish();
-        }
+        var spot = this.raii.GetSpot();
         
         if (Plugin.Configuration.SortFish) {
-            var spectral = this.availableFish!
-                               .Where(x => x.CanCauseSpectral)
-                               .ToList();
-            var intuition = this.availableFish!
-                                .Where(x => x.Intuition != null)
-                                .ToList();
-            
             var spectralHeader = Loc.Localize("OverlayWindowSpectralHeader", "Spectral");
             var intuitionHeader = Loc.Localize("OverlayWindowIntuitionHeader", "Intuition");
             var voyageHeader = Loc.Localize("OverlayWindowVoyageHeader", "Voyage");
             var normalHeader = Loc.Localize("OverlayWindowNormalHeader", "All");
             
             using (ImRaii.TabBar("##DistantSeasOverlaySort")) {
-                if (spectral.Any()) {
+                if (this.raii.HasSpectralFish()) {
                     using var tab = ImRaii.TabItem(spectralHeader);
-                    if (tab.Success) this.DrawFishArray(this.spot!, spectral);
+                    if (tab.Success) this.DrawFishArray(spot, this.raii.GetSpectralFish());
                 }
                 
-                if (intuition.Any()) {
+                if (this.raii.HasIntuitionFish()) {
                     using var tab = ImRaii.TabItem(intuitionHeader);
-                    if (tab.Success) this.DrawFishArray(this.spot!, intuition);
+                    if (tab.Success) this.DrawFishArray(spot, this.raii.GetIntuitionFish());
                 }
-                
-                if (this.voyageFish!.Any()) {
+
+                var voyage = this.raii.GetVoyageFish();
+                if (voyage.Any()) {
                     using var tab = ImRaii.TabItem(voyageHeader);
-                    if (tab.Success) this.DrawFishArray(this.spot!, this.voyageFish!);
+                    if (tab.Success) this.DrawFishArray(spot, voyage);
                 }
                 
                 using (var tab = ImRaii.TabItem(normalHeader)) {
-                    if (tab.Success) this.DrawFishArray(this.spot!, this.availableFish!);
+                    if (tab.Success) this.DrawFishArray(spot, this.raii.GetAvailableFish());
                 }
             }
         } else {
-            this.DrawFishArray(this.spot!, this.availableFish!);
+            this.DrawFishArray(spot, this.raii.GetAvailableFish());
         }
     }
     
@@ -289,7 +252,7 @@ public class OverlayWindow : DistantSeasWindow {
     }
     
     private void DrawSpecificFish(Spot spot, Fish fish) {
-        var fishItem = this.itemSheet.GetRow(fish.ItemId)!;
+        var fishItem = this.raii.GetFishItem(fish);
         var fishName = fishItem.Name.ToDalamudString().TextValue;
         
         if (fish.Intuition != null) {
@@ -321,7 +284,7 @@ public class OverlayWindow : DistantSeasWindow {
             using (ImRaii.PushIndent()) {
                 foreach (var (id, amount) in fish.Intuition.Fish) {
                     var intFish = spot.Fish.First(x => x.ItemId == id);
-                    var intFishItem = this.itemSheet.GetRow(intFish.ItemId)!;
+                    var intFishItem = this.raii.GetFishItem(intFish);
                     var intFishName = intFishItem.Name.ToDalamudString().TextValue;
                     var text = $"{amount}x {intFishName}";
                     
@@ -342,7 +305,7 @@ public class OverlayWindow : DistantSeasWindow {
         
         for (var i = 0; i < baitChain.Count; i++) {
             var itemId = baitChain[i];
-            var item = this.itemSheet.GetRow(itemId)!;
+            var item = this.raii.GetItem(itemId);
             var icon = Plugin.TextureProvider.GetIcon(item.Icon);
             
             var canSwitchBait = Utils.IsBait(itemId)
@@ -362,7 +325,7 @@ public class OverlayWindow : DistantSeasWindow {
                                : null;
             
             var cursor = ImGui.GetCursorPos();
-            ImGui.Image(icon.ImGuiHandle, iconSize);
+            ImGui.Image(icon!.ImGuiHandle, iconSize);
             
             if (ImGui.IsItemHovered()) {
                 var str = item.Name.ToDalamudString().TextValue;
