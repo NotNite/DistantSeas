@@ -20,9 +20,11 @@ public class OverlayWindow : DistantSeasWindow {
     private bool tinting;
     
     private readonly FishRaii raii;
+    private readonly FishFilter filter;
     
     public OverlayWindow() : base("Distant Seas Overlay") {
         this.raii = new FishRaii();
+        this.filter = new FishFilter(this.raii);
     }
     
     public override void Dispose() {
@@ -247,7 +249,11 @@ public class OverlayWindow : DistantSeasWindow {
     }
     
     private void DrawFishArray(Spot spot, List<Fish> fishies) {
-        var sorted = fishies.OrderByDescending(x => x.GetMaxPoints().Item3);
+        this.filter.Draw();
+        ImGui.Spacing();
+        
+        var sorted = this.filter.Apply(fishies)
+                         .OrderByDescending(x => x.GetMaxPoints().Item3);
         foreach (var fish in sorted) this.DrawSpecificFish(spot, fish);
     }
     

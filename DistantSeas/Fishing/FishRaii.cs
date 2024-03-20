@@ -5,6 +5,7 @@ using System.Timers;
 using DistantSeas.Common;
 using Lumina.Excel;
 using Lumina.Excel.GeneratedSheets;
+using Action = System.Action;
 
 namespace DistantSeas.Fishing;
 
@@ -18,6 +19,9 @@ public class FishRaii : IDisposable {
     private Spot? spot;
     private List<Fish>? availableFish;
     private List<Fish>? voyageFish;
+    private List<Item>? usableBait;
+
+    public Action? Updated;
 
     public bool Enabled {
         get => this.timer.Enabled;
@@ -52,6 +56,8 @@ public class FishRaii : IDisposable {
         this.spot = null;
         this.availableFish = null;
         this.voyageFish = null;
+        this.usableBait = null;
+        this.Updated = null;
     }
     
     // Spot
@@ -74,13 +80,28 @@ public class FishRaii : IDisposable {
         return this.voyageFish!;
     }
 
+    public List<Item> GetUsableBait() {
+        if (this.usableBait == null)
+            this.UpdateFish();
+        return this.usableBait!;
+    }
+
     private void UpdateFish() {
         var available = Plugin.BaitManager.GetAvailableFish();
         this.availableFish = available;
 
         var missionState = Plugin.StateTracker.MissionState;
-        var voyage = Plugin.FishData.FilterForVoyageMission(this.availableFish, missionState);
+        var voyage = Plugin.FishData.FilterForVoyageMission(available, missionState);
         this.voyageFish = voyage;
+        
+        this.usableBait = available.Select(fish => Plugin.BaitManager.GetBaitChain(fish.ItemId).First())
+                                    .Where(id => id != 0)
+                                    .Distinct()
+                                    .Order()
+                                    .Select(id => this.itemSheet.GetRow(id)!)
+                                    .ToList();
+        
+        this.Updated?.Invoke();
     }
     
     // Spectral fish
