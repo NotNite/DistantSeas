@@ -29,7 +29,7 @@ public class ProgressSection : MainWindowSection {
         var width = ImGui.GetContentRegionAvail().X;
         var state = Plugin.AchievementTracker.GetState();
 
-        using (ImRaii.PushFont(Plugin.HeaderFontHandle.ImFont)) {
+        using (Plugin.HeaderFontHandle.Push()) {
             var text = state.TotalPoints.ToString("N0");
             ImGuiHelpers.CenteredText(text);
         }
@@ -89,9 +89,9 @@ public class ProgressSection : MainWindowSection {
         ImGui.TableNextColumn();
 
         var iconId = achievement.Icon;
-        var icon = Plugin.TextureProvider.GetIcon(iconId)!;
+        var icon = Plugin.TextureProvider.GetFromGameIcon((int) iconId);
         var iconSize = ImGui.GetTextLineHeight();
-        ImGui.Image(icon.ImGuiHandle, new Vector2(iconSize, iconSize));
+        ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new Vector2(iconSize, iconSize));
         ImGui.TableNextColumn();
 
         ImGui.TextUnformatted(achievement.Name);

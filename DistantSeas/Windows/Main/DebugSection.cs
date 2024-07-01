@@ -94,9 +94,9 @@ public unsafe class DebugSection : MainWindowSection {
         ImGui.TextUnformatted($"route: {director->CurrentRoute} - {spotsStr}");
 
 
-        var spot = spots[director->CurrentZone];
+        var spot = spots[(int) director->CurrentZone];
         var spotName = spot.PlaceName.Value!.Name.ToDalamudString().TextValue;
-        var time = times[director->CurrentZone];
+        var time = times[(int) director->CurrentZone];
         var timeStr = time switch {
             1 => "Day",
             2 => "Sunset",
@@ -165,12 +165,12 @@ public unsafe class DebugSection : MainWindowSection {
             ImGui.Separator();
 
             var fishItem = this.item.GetRow(fishy.ItemId)!;
-            var icon = Plugin.TextureProvider.GetIcon(fishItem.Icon)!;
+            var icon = Plugin.TextureProvider.GetFromGameIcon((int) fishItem.Icon);
             var lineHeight = ImGui.GetTextLineHeight();
             var iconSize = new Vector2(lineHeight, lineHeight);
 
             using (ImRaii.PushId(fishy.ItemId.ToString())) {
-                ImGui.Image(icon.ImGuiHandle, iconSize);
+                ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, iconSize);
                 ImGui.SameLine();
                 ImGui.TextUnformatted(fishItem.Name.ToDalamudString().TextValue);
 
@@ -179,10 +179,10 @@ public unsafe class DebugSection : MainWindowSection {
                     foreach (var biteTime in fishy.BiteTimes) {
                         var bait = this.item.GetRow(biteTime.Key)!;
                         var baitName = bait.Name.ToDalamudString().TextValue;
-                        var baitIcon = Plugin.TextureProvider.GetIcon(bait.Icon)!;
+                        var baitIcon = Plugin.TextureProvider.GetFromGameIcon((int) bait.Icon);
                         var timeStr = Utils.FormatRange(biteTime.Value.Range);
 
-                        ImGui.Image(baitIcon.ImGuiHandle, iconSize);
+                        ImGui.Image(baitIcon.GetWrapOrEmpty().ImGuiHandle, iconSize);
                         ImGui.SameLine();
                         ImGui.TextUnformatted($"{baitName}: {timeStr}");
                     }
@@ -203,9 +203,9 @@ public unsafe class DebugSection : MainWindowSection {
                         foreach (var (id, amount) in fishy.Intuition.Fish) {
                             var fishRow = this.item.GetRow(id)!;
                             var fishName = fishRow.Name.ToDalamudString().TextValue;
-                            var fishIcon = Plugin.TextureProvider.GetIcon(fishRow.Icon)!;
+                            var fishIcon = Plugin.TextureProvider.GetFromGameIcon((int) fishRow.Icon);
 
-                            ImGui.Image(fishIcon.ImGuiHandle, iconSize);
+                            ImGui.Image(fishIcon.GetWrapOrEmpty().ImGuiHandle, iconSize);
                             ImGui.SameLine();
                             ImGui.TextUnformatted($"x{amount} {fishName}");
                         }
@@ -231,9 +231,9 @@ public unsafe class DebugSection : MainWindowSection {
                                 if (weatherEntry.Value) {
                                     var weatherRow = this.weather.GetRow((uint) weatherEntry.Key)!;
                                     var weatherName = weatherRow.Name.ToDalamudString().TextValue;
-                                    var weatherIcon = Plugin.TextureProvider.GetIcon((uint) weatherRow.Icon)!;
+                                    var weatherIcon = Plugin.TextureProvider.GetFromGameIcon((uint) weatherRow.Icon);
 
-                                    ImGui.Image(weatherIcon.ImGuiHandle, iconSize);
+                                    ImGui.Image(weatherIcon.GetWrapOrEmpty().ImGuiHandle, iconSize);
                                     ImGui.SameLine();
                                     ImGui.TextUnformatted(weatherName);
                                 }

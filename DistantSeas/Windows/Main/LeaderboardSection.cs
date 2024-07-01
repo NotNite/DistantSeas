@@ -14,7 +14,7 @@ public class LeaderboardSection : MainWindowSection {
     ) { }
 
     public override void Draw() {
-        using (ImRaii.PushFont(Plugin.HeaderFontHandle.ImFont)) {
+        using (Plugin.HeaderFontHandle.Push()) {
             ImGui.TextUnformatted(Loc.Localize("LeaderboardSectionSoon", "soon:tm:"));
         }
 

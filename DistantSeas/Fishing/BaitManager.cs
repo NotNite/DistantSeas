@@ -30,7 +30,7 @@ public class BaitManager : IDisposable {
         // Stolen from my Simple Tweaks bait command tweak:
         // https://github.com/Caraxi/SimpleTweaksPlugin/blob/278688543b936b2081b366ef80667ae48bb784e0/Tweaks/BaitCommand.cs#L34C32-L34C32 
         this.currentBaitAddr =
-            Plugin.SigScanner.GetStaticAddressFromSig("48 83 C4 30 5B C3 49 8B C8 E8 ?? ?? ?? ?? 3B 05");
+            Plugin.SigScanner.GetStaticAddressFromSig("3B 05 ?? ?? ?? ?? 75 ?? 80 7E");
         var executeCommandPtr = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? 8D 43 0A");
         executeCommand = Marshal.GetDelegateForFunctionPointer<ExecuteCommandDelegate>(executeCommandPtr);
 

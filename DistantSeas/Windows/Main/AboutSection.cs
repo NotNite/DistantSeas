@@ -3,6 +3,8 @@ using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.Internal;
+using Dalamud.Interface.Textures;
+using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility;
 using Dalamud.Utility;
 using DistantSeas.Core;
@@ -12,7 +14,7 @@ using ImGuiNET;
 namespace DistantSeas.Windows.Main;
 
 public class AboutSection : MainWindowSection {
-    private IDalamudTextureWrap icon;
+    private ISharedImmediateTexture icon;
 
     public AboutSection() : base(
         FontAwesomeIcon.InfoCircle,
@@ -20,17 +22,13 @@ public class AboutSection : MainWindowSection {
         MainWindowCategory.None
     ) {
         var iconPath = Plugin.ResourceManager.GetDataPath("icon.png");
-        this.icon = Plugin.TextureProvider.GetTextureFromFile(new FileInfo(iconPath))!;
-    }
-
-    public override void Dispose() {
-        this.icon.Dispose();
+        this.icon = Plugin.TextureProvider.GetFromFile(iconPath);
     }
 
     public override void Draw() {
         var iconWidth = ImGui.GetContentRegionAvail().X / 4;
         ImGuiHelpers.CenterCursorFor((int) iconWidth);
-        ImGui.Image(this.icon.ImGuiHandle, new Vector2(iconWidth, iconWidth));
+        ImGui.Image(this.icon.GetWrapOrEmpty().ImGuiHandle, new Vector2(iconWidth, iconWidth));
 
         var headerStr = Loc.Localize("AboutSectionHeader", "Distant Seas, by NotNite");
         var versionStr = Loc.Localize("AboutSectionVersion", "Version {0}");

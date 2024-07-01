@@ -87,9 +87,9 @@ public class FishFilter {
                 var cursor = ImGui.GetCursorPos();
                 Select($"##Bait{item.RowId}", this.baits, item);
                 ImGui.SetCursorPos(cursor);
-                
-                var icon = Plugin.TextureProvider.GetIcon(item.Icon)!;
-                ImGui.Image(icon.ImGuiHandle, iconSize);
+
+                var icon = Plugin.TextureProvider.GetFromGameIcon((int) item.Icon);
+                ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, iconSize);
                 ImGui.SameLine(0, ImGui.GetStyle().ItemInnerSpacing.X);
                 ImGui.Text(item.Name);
             }

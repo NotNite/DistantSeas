@@ -111,7 +111,7 @@ public unsafe class NormalStateTracker : IStateTracker {
         var oceanFishing = EventFramework.Instance()->GetInstanceContentOceanFishing();
         if (oceanFishing != null) {
             this.CurrentRoute = oceanFishing->CurrentRoute;
-            this.CurrentZone = oceanFishing->CurrentZone;
+            this.CurrentZone = (byte) oceanFishing->CurrentZone;
 
             var weather = EnvManager.Instance()->ActiveWeather;
             this.CurrentWeather = (WeatherType) weather;

@@ -7,6 +7,7 @@ using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.Command;
 using Dalamud.Game.Gui;
 using Dalamud.Interface.GameFonts;
+using Dalamud.Interface.ManagedFontAtlas;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
@@ -20,7 +21,7 @@ public sealed class Plugin : IDalamudPlugin {
     public string Name => "Distant Seas";
     private const string CommandName = "/pseas";
 
-    [PluginService] public static DalamudPluginInterface PluginInterface { get; private set; } = null!;
+    [PluginService] public static IDalamudPluginInterface PluginInterface { get; private set; } = null!;
     [PluginService] public static ICommandManager CommandManager { get; private set; } = null!;
     [PluginService] public static IFramework Framework { get; private set; } = null!;
     [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
@@ -51,7 +52,7 @@ public sealed class Plugin : IDalamudPlugin {
     public static Configuration Configuration = null!;
     public static WindowManager WindowManager = null!;
 
-    public static GameFontHandle HeaderFontHandle = null!;
+    public static IFontHandle HeaderFontHandle = null!;
 
     public static event Action? EnteredOceanFishing;
     public static event Action? ExitedOceanFishing;
@@ -78,7 +79,7 @@ public sealed class Plugin : IDalamudPlugin {
         });
 
         var style = new GameFontStyle(GameFontFamilyAndSize.Axis36);
-        HeaderFontHandle = PluginInterface.UiBuilder.GetGameFontHandle(style);
+        HeaderFontHandle = PluginInterface.UiBuilder.FontAtlas.NewGameFontHandle(style);
     }
 
     public void Dispose() {
