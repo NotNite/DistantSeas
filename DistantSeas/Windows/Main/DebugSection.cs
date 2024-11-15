@@ -12,14 +12,14 @@ using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using ImGuiNET;
 using Lumina.Excel;
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 using Lumina.Text;
-using Weather = Lumina.Excel.GeneratedSheets.Weather;
+using Weather = Lumina.Excel.Sheets.Weather;
 
 namespace DistantSeas.Windows.Main;
 
 public unsafe class DebugSection : MainWindowSection {
-    private RawExcelSheet ikdPlayerMissionCondition;
+    private ExcelSheet<IKDPlayerMissionCondition> ikdPlayerMissionCondition;
     private ExcelSheet<IKDRoute> ikdRoute;
     private ExcelSheet<IKDSpot> ikdSpot;
     private ExcelSheet<Item> item;
@@ -30,7 +30,7 @@ public unsafe class DebugSection : MainWindowSection {
         "DEBUG",
         MainWindowCategory.Debug
     ) {
-        this.ikdPlayerMissionCondition = Plugin.DataManager.Excel.GetSheetRaw("IKDPlayerMissionCondition")!;
+        this.ikdPlayerMissionCondition = Plugin.DataManager.Excel.GetSheet<IKDPlayerMissionCondition>();
         this.ikdRoute = Plugin.DataManager.Excel.GetSheet<IKDRoute>()!;
         this.ikdSpot = Plugin.DataManager.Excel.GetSheet<IKDSpot>()!;
         this.item = Plugin.DataManager.Excel.GetSheet<Item>()!;
@@ -87,12 +87,11 @@ public unsafe class DebugSection : MainWindowSection {
         ImGui.TextUnformatted($"spectral: {director->SpectralCurrentActive}");
 
         var route = this.ikdRoute.GetRow(director->CurrentRoute!)!;
-        var spots = route.UnkData0.Select(x => this.ikdSpot.GetRow(x.Spot)!).ToList();
-        var times = route.UnkData0.Select(x => x.Time).ToList();
+        var spots = route.Spot.Select(x => x.Value).ToList();
+        var times = route.Time.Select(x => x.RowId).ToList();
 
-        var spotsStr = string.Join(", ", spots.Select(x => x.PlaceName.Value!.Name.ToDalamudString().TextValue));
+        var spotsStr = string.Join(", ", spots.Select(x => x.PlaceName.Value.Name.ToDalamudString().TextValue));
         ImGui.TextUnformatted($"route: {director->CurrentRoute} - {spotsStr}");
-
 
         var spot = spots[(int) director->CurrentZone];
         var spotName = spot.PlaceName.Value!.Name.ToDalamudString().TextValue;
@@ -143,8 +142,8 @@ public unsafe class DebugSection : MainWindowSection {
 
     private (byte, string) GetInfoForVoyageMission(uint rowId) {
         var row = this.ikdPlayerMissionCondition.GetRow(rowId)!;
-        var amount = row.ReadColumn<byte>(0);
-        var str = row.ReadColumn<SeString>(1)!.ToDalamudString().TextValue;
+        var amount = row.Unknown1;
+        var str = row.Unknown0.ExtractText();
         return (amount, str);
     }
 

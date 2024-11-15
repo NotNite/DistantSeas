@@ -42,7 +42,7 @@ public class AlarmManager : IDisposable {
 
     public void DispatchAlarm() {
         if (Plugin.Configuration.AlarmSoundEnabled) {
-            UIModule.PlayChatSoundEffect((uint) Plugin.Configuration.AlarmSound);
+            UIGlobals.PlayChatSoundEffect((uint) Plugin.Configuration.AlarmSound);
         }
 
         var msg = Loc.Localize("AlarmMessage", "[Distant Seas] Next route in {0} minutes.");

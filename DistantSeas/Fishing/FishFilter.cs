@@ -7,7 +7,7 @@ using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
 using DistantSeas.Common;
 using ImGuiNET;
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 
 namespace DistantSeas.Fishing;
 
@@ -91,7 +91,7 @@ public class FishFilter {
                 var icon = Plugin.TextureProvider.GetFromGameIcon((int) item.Icon);
                 ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, iconSize);
                 ImGui.SameLine(0, ImGui.GetStyle().ItemInnerSpacing.X);
-                ImGui.Text(item.Name);
+                ImGui.Text(item.Name.ExtractText());
             }
         } finally {
             ImGui.EndCombo();

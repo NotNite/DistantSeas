@@ -9,7 +9,7 @@ using Dalamud.Utility;
 using DistantSeas.Core;
 using ImGuiNET;
 using Lumina.Excel;
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 
 namespace DistantSeas.Windows.Main;
 
@@ -94,9 +94,9 @@ public class ProgressSection : MainWindowSection {
         ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new Vector2(iconSize, iconSize));
         ImGui.TableNextColumn();
 
-        ImGui.TextUnformatted(achievement.Name);
+        ImGui.TextUnformatted(achievement.Name.ExtractText());
         ImGui.TableNextColumn();
 
-        ImGui.TextUnformatted(achievement.Description);
+        ImGui.TextUnformatted(achievement.Description.ExtractText());
     }
 }

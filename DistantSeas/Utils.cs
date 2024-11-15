@@ -5,8 +5,8 @@ using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
 using ImGuiNET;
-using Lumina.Excel.GeneratedSheets;
 using DistantSeas.Common;
+using Lumina.Excel.Sheets;
 using Range = DistantSeas.Common.Range;
 
 namespace DistantSeas;

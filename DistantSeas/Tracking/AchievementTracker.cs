@@ -51,7 +51,7 @@ public unsafe class AchievementTracker : IDisposable {
         Plugin.ClientState.Logout -= this.OnLogout;
     }
 
-    private void OnLogout() {
+    private void OnLogout(int type, int code) {
         this.cachedState = null;
     }
 

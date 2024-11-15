@@ -2,7 +2,7 @@
 using DistantSeas.Common;
 using DistantSeas.SpreadsheetSpaghetti;
 using Lumina;
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 using Range = DistantSeas.Common.Range;
 
 // not exhaustive because of an "unnamed enum value", what the fuck are you on
@@ -34,8 +34,8 @@ Spot ProcessSpot(
     var fish = new List<Fish>();
 
     var spotName = spectral
-                       ? spot.SpotSub.Value!.PlaceName.Value!.Name.TextValue()
-                       : spot.SpotMain.Value!.PlaceName.Value!.Name.TextValue();
+                       ? spot.SpotSub.Value!.PlaceName.Value!.Name.ExtractText()
+                       : spot.SpotMain.Value!.PlaceName.Value!.Name.ExtractText();
 
     var fishRows = new List<string>();
     var collecting = false;
@@ -113,7 +113,7 @@ Item LookupByName(string name) {
     return item.ToList()
                .First(x => {
                    var nameLowercase = name.ToLower();
-                   var itemNameLowercase = x.Name.TextValue().ToLower();
+                   var itemNameLowercase = x.Name.ExtractText().ToLower();
                    return itemNameLowercase == nameLowercase;
                });
 }
@@ -181,7 +181,7 @@ Fish ParseFish(RouteType type, uint[] baits, List<string> availability, string r
             var avail = availability[i];
             WeatherType? entry = null;
             foreach (var weatherRow in weather) {
-                if (avail == weatherRow.Name.TextValue()) {
+                if (avail == weatherRow.Name.ExtractText()) {
                     entry = (WeatherType) weatherRow.RowId;
                     break;
                 }
@@ -261,9 +261,9 @@ Fish ParseFish(RouteType type, uint[] baits, List<string> availability, string r
         ItemId = fishItem.RowId,
         CellType = cellType,
         VoyageMissionType = voyageMissionType,
-        CanCauseSpectral = fishItem.Name.TextValue().Contains("Spectral")
+        CanCauseSpectral = fishItem.Name.ExtractText().Contains("Spectral")
                            // Okay man
-                           || fishItem.Name.TextValue() == "Spectresaur",
+                           || fishItem.Name.ExtractText() == "Spectresaur",
 
         RequiredBait = requiredBait,
         BiteTimes = biteTimes,

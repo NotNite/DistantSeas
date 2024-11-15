@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DistantSeas.Common;
 using DistantSeas.Tracking.LogEntries;
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 
 namespace DistantSeas.Tracking;
 
@@ -25,13 +25,14 @@ public class JournalEntryInfo {
 
         var ikdRoute = Plugin.DataManager.Excel.GetSheet<IKDRoute>()!;
         var routeRow = ikdRoute.GetRow(enterBoat.Route)!;
-        var destination = routeRow.UnkData0[2];
+        var spot = routeRow.Spot[2].RowId;
+        var time = routeRow.Time[2].RowId;
 
         return new JournalEntryInfo {
             Path = path,
             Time = header.Time,
-            DestinationName = Utils.SpotTypeName((SpotType) destination.Spot),
-            DestinationTime = (Time) destination.Time,
+            DestinationName = Utils.SpotTypeName((SpotType) spot),
+            DestinationTime = (Time) time,
             TotalPoints = totalPointsUpdate.TotalPoints,
             Spectrals = spectrals
         };

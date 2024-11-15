@@ -9,8 +9,8 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Environment;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using Lumina.Excel;
-using Lumina.Excel.GeneratedSheets;
-using Action = Lumina.Excel.GeneratedSheets.Action;
+using Lumina.Excel.Sheets;
+using Action = Lumina.Excel.Sheets.Action;
 
 namespace DistantSeas.Fishing;
 
@@ -43,7 +43,7 @@ public unsafe class NormalStateTracker : IStateTracker {
         this.oceanFishingZones = new();
         var territoryType = Plugin.DataManager.GetExcelSheet<TerritoryType>()!;
         foreach (var row in territoryType) {
-            if (row.TerritoryIntendedUse == 46) {
+            if (row.TerritoryIntendedUse.RowId == 46) {
                 this.oceanFishingZones.Add(row.RowId);
             }
         }
@@ -57,7 +57,7 @@ public unsafe class NormalStateTracker : IStateTracker {
 
     public bool HasActionUnlocked(uint id) {
         var row = actionSheet.GetRow(id)!;
-        return UIState.Instance()->IsUnlockLinkUnlocked(row.UnlockLink);
+        return UIState.Instance()->IsUnlockLinkUnlocked(row.UnlockLink.RowId);
     }
 
     public bool IsActionReady(uint id) {

@@ -8,7 +8,7 @@ using Dalamud.Plugin.Services;
 using DistantSeas.Common;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using Lumina.Excel;
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 
 namespace DistantSeas.Fishing;
 
@@ -31,7 +31,7 @@ public class BaitManager : IDisposable {
         // https://github.com/Caraxi/SimpleTweaksPlugin/blob/278688543b936b2081b366ef80667ae48bb784e0/Tweaks/BaitCommand.cs#L34C32-L34C32 
         this.currentBaitAddr =
             Plugin.SigScanner.GetStaticAddressFromSig("3B 05 ?? ?? ?? ?? 75 ?? 80 7E");
-        var executeCommandPtr = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? 8D 43 0A");
+        var executeCommandPtr = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? EB ?? 83 7C 2F ?? 00");
         executeCommand = Marshal.GetDelegateForFunctionPointer<ExecuteCommandDelegate>(executeCommandPtr);
 
         Plugin.Framework.Update += this.FrameworkUpdate;
@@ -55,15 +55,15 @@ public class BaitManager : IDisposable {
 
     public Time? GetCurrentTime() {
         var route = this.ikdRoute.GetRow(Plugin.StateTracker.CurrentRoute)!;
-        var time = route.UnkData0[this.CurrentZone].Time;
+        var time = route.Time[(int) this.CurrentZone].Value.RowId;
         return time == 0 ? null : (Time) time;
     }
 
     public Spot GetCurrentSpot() {
         var route = this.ikdRoute.GetRow(Plugin.StateTracker.CurrentRoute)!;
-        var spotId = (SpotType) route.UnkData0[this.CurrentZone].Spot;
+        var spotId = route.Spot[(int) this.CurrentZone].RowId;
         return Plugin.FishData.Spots.First(
-            x => x.Type == spotId && x.IsSpectral == Plugin.StateTracker.IsSpectralActive
+            x => x.Type == (SpotType) spotId && x.IsSpectral == Plugin.StateTracker.IsSpectralActive
         );
     }
 

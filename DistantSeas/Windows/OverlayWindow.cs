@@ -131,16 +131,15 @@ public class OverlayWindow : DistantSeasWindow {
         var toUseColor = isOverriden ? overrideColor : textColor;
 
         // Time of day and zone
-        var currentZoneInfo = this.raii.GetCurrentZoneInfo();
-        var currentZone = this.raii.GetZoneFrom(currentZoneInfo);
+        var currentZone = this.raii.GetCurrentSpot().Value;
+        var currentTime = (Time) this.raii.GetCurrentTime().RowId;
 
         var zoneSpot = Plugin.StateTracker.IsSpectralActive
                            ? currentZone.SpotSub.Value!
                            : currentZone.SpotMain.Value!;
         var zoneName = zoneSpot.PlaceName.Value!.Name.ToDalamudString().TextValue;
 
-        var time = (Time) currentZoneInfo.Time;
-        var timeIcon = time switch {
+        var timeIcon = currentTime switch {
             Time.Day => FontAwesomeIcon.Sun,
             Time.Sunset => FontAwesomeIcon.CloudSun,
             Time.Night => FontAwesomeIcon.Moon,
@@ -154,7 +153,7 @@ public class OverlayWindow : DistantSeasWindow {
         // Time of day
         using (ImRaii.PushColor(ImGuiCol.Text, toUseColor)) {
             Utils.Icon(timeIcon);
-            if (ImGui.IsItemHovered()) ImGui.SetTooltip(Utils.TimeName(time));
+            if (ImGui.IsItemHovered()) ImGui.SetTooltip(Utils.TimeName(currentTime));
             ImGui.SameLine();
 
             // Zone
@@ -188,13 +187,13 @@ public class OverlayWindow : DistantSeasWindow {
         // Current bait
         var baitItem = this.raii.GetCurrentBaitItem();
         if (baitItem != null) {
-            var baitIcon = Plugin.TextureProvider.GetFromGameIcon((int) baitItem.Icon)!;
+            var baitIcon = Plugin.TextureProvider.GetFromGameIcon((int) baitItem.Value.Icon)!;
 
             var lineHeight = ImGui.GetTextLineHeight();
             var imageHeight = new Vector2(lineHeight, lineHeight);
 
             ImGui.Image(baitIcon.GetWrapOrEmpty().ImGuiHandle, imageHeight);
-            if (ImGui.IsItemHovered()) ImGui.SetTooltip(baitItem.Name.ToDalamudString().TextValue);
+            if (ImGui.IsItemHovered()) ImGui.SetTooltip(baitItem.Value.Name.ExtractText());
         }
     }
 

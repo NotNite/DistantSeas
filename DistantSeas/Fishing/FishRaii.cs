@@ -4,7 +4,7 @@ using System.Linq;
 using System.Timers;
 using DistantSeas.Common;
 using Lumina.Excel;
-using Lumina.Excel.GeneratedSheets;
+using Lumina.Excel.Sheets;
 using Action = System.Action;
 
 namespace DistantSeas.Fishing;
@@ -31,7 +31,7 @@ public class FishRaii : IDisposable {
             this.timer.Enabled = value;
         }
     }
-    
+
     public FishRaii() {
         this.ikdRouteSheet = Plugin.DataManager.Excel.GetSheet<IKDRoute>()!;
         this.ikdSpotSheet = Plugin.DataManager.Excel.GetSheet<IKDSpot>()!;
@@ -59,13 +59,13 @@ public class FishRaii : IDisposable {
         this.usableBait = null;
         this.Updated = null;
     }
-    
+
     // Spot
 
     public Spot GetSpot() => this.spot ?? this.UpdateSpot();
 
     private Spot UpdateSpot() => this.spot = Plugin.BaitManager.GetCurrentSpot();
-    
+
     // Fish list
 
     public List<Fish> GetAvailableFish() {
@@ -93,19 +93,19 @@ public class FishRaii : IDisposable {
         var missionState = Plugin.StateTracker.MissionState;
         var voyage = Plugin.FishData.FilterForVoyageMission(available, missionState);
         this.voyageFish = voyage;
-        
+
         this.usableBait = available.Select(fish => Plugin.BaitManager.GetBaitChain(fish.ItemId).First())
-                                    .Where(id => id != 0)
-                                    .Distinct()
-                                    .Order()
-                                    .Select(id => this.itemSheet.GetRow(id)!)
-                                    .ToList();
-        
+                                   .Where(id => id != 0)
+                                   .Distinct()
+                                   .Order()
+                                   .Select(id => this.itemSheet.GetRow(id)!)
+                                   .ToList();
+
         this.Updated?.Invoke();
     }
-    
+
     // Spectral fish
-    
+
     private static bool SpectralPredicate(Fish fish) => fish.CanCauseSpectral;
 
     public bool HasSpectralFish() => this.GetAvailableFish().Any(SpectralPredicate);
@@ -113,9 +113,9 @@ public class FishRaii : IDisposable {
     public List<Fish> GetSpectralFish() => this.GetAvailableFish()
                                                .Where(SpectralPredicate)
                                                .ToList();
-    
+
     // Intuition fish
-    
+
     private static bool IntuitionPredicate(Fish fish) => fish.Intuition != null;
 
     public bool HasIntuitionFish() => this.GetAvailableFish().Any(IntuitionPredicate);
@@ -123,18 +123,19 @@ public class FishRaii : IDisposable {
     public List<Fish> GetIntuitionFish() => this.GetAvailableFish()
                                                 .Where(IntuitionPredicate)
                                                 .ToList();
-    
+
     // Route
 
-    public IKDRoute.IKDRouteUnkData0Obj GetCurrentZoneInfo() {
+    public RowRef<IKDSpot> GetCurrentSpot() {
         var route = this.ikdRouteSheet.GetRow(Plugin.StateTracker.CurrentRoute);
-        return route!.UnkData0[Plugin.BaitManager.CurrentZone];
-    }
-
-    public IKDSpot GetZoneFrom(IKDRoute.IKDRouteUnkData0Obj zoneInfo) {
-        return this.ikdSpotSheet.GetRow(zoneInfo.Spot)!;
+        return route.Spot[(int) Plugin.BaitManager.CurrentZone];
     }
     
+    public RowRef<IKDTimeDefine> GetCurrentTime() {
+        var route = this.ikdRouteSheet.GetRow(Plugin.StateTracker.CurrentRoute);
+        return route.Time[(int) Plugin.BaitManager.CurrentZone];
+    }
+
     // Items
 
     public Item GetItem(uint id) => this.itemSheet.GetRow(id)!;

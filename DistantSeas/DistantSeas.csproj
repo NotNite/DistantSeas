@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="Dalamud.Plugin.Bootstrap.targets"/>
-
+<Project Sdk="Dalamud.NET.Sdk/11.0.0">
     <PropertyGroup>
-        <Version>1.1.0.1</Version>
+        <Version>1.1.0.2</Version>
     </PropertyGroup>
 
     <ItemGroup>
         <Content Include="../Data/**/*" CopyToOutputDirectory="PreserveNewest"/>
         <ProjectReference Include="..\DistantSeas.Common\DistantSeas.Common.csproj"/>
-        <Reference Include="CheapLoc">
-            <HintPath>$(DalamudLibPath)/CheapLoc.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
+        <Reference Include="CheapLoc" Private="false"/>
     </ItemGroup>
 </Project>

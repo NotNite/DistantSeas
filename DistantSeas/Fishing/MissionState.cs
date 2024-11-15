@@ -1,4 +1,5 @@
 ﻿using Dalamud.Utility;
+using Lumina.Excel.Sheets;
 using Lumina.Text;
 
 namespace DistantSeas.Fishing;
@@ -12,12 +13,12 @@ public class MissionState {
     public MissionState() { }
 
     public MissionState(uint rowId) {
-        var sheet = Plugin.DataManager.Excel.GetSheetRaw("IKDPlayerMissionCondition")!;
+        var sheet = Plugin.DataManager.Excel.GetSheet<IKDPlayerMissionCondition>()!;    
         var row = sheet.GetRow(rowId)!;
 
         this.Row = rowId;
-        this.Total = row.ReadColumn<byte>(0);
+        this.Total = row.Unknown1;
         this.Progress = 0;
-        this.Objective = row.ReadColumn<SeString>(1)!.ToDalamudString().TextValue;
+        this.Objective = row.Unknown0.ExtractText();
     }
 }
