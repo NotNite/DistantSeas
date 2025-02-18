@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
@@ -16,6 +17,10 @@ namespace DistantSeas.Windows.Main;
 
 public class JournalSection : MainWindowSection {
     private List<JournalEntryInfo>? journalEntries = null;
+    private HashSet<DateTime> availableDates = new();
+    private string selectedFilter = "all";
+    private DateTime? selectedDate = null;
+    private int maxEntriesToShow = 50;
 
     public JournalSection() : base(
         FontAwesomeIcon.Book,
@@ -51,6 +56,43 @@ public class JournalSection : MainWindowSection {
             || ImGui.Button(Loc.Localize("JournalSectionRefresh", "Refresh"))
         ) {
             this.UpdateJournalEntries();
+            this.UpdateAvailableDates();
+        }
+
+        // Filter controls group
+        using (ImRaii.Group()) {
+            if (ImGui.Button(Loc.Localize("JournalSectionShowAll", "Show All"))) {
+                selectedFilter = "all";
+                selectedDate = null;
+            }
+            ImGui.SameLine();
+            if (ImGui.Button(Loc.Localize("JournalSectionToday", "Today"))) {
+                selectedFilter = "today";
+                selectedDate = DateTime.Today;
+            }
+            ImGui.SameLine();
+            if (ImGui.Button(Loc.Localize("JournalSectionLastWeek", "Last 7 Days"))) {
+                selectedFilter = "week";
+                selectedDate = DateTime.Today.AddDays(-7);
+            }
+            ImGui.SameLine();
+
+            var dateLabel = selectedDate?.ToString("yyyy-MM-dd") ?? Loc.Localize("JournalSectionSelectDate", "Select Date");
+            ImGui.SetNextItemWidth(120);
+            if (ImGui.BeginCombo("##DateSelect", dateLabel)) {
+                foreach (var date in availableDates.OrderByDescending(d => d)) {
+                    var isSelected = selectedDate.HasValue && selectedDate.Value.Date == date.Date;
+                    if (ImGui.Selectable(date.ToString("yyyy-MM-dd"), isSelected)) {
+                        selectedFilter = "custom";
+                        selectedDate = date;
+                    }
+                }
+                ImGui.EndCombo();
+            }
+
+            ImGui.SameLine();
+            ImGui.SetNextItemWidth(100);
+            ImGui.InputInt(Loc.Localize("JournalSectionMaxEntries", "Max Entries"), ref maxEntriesToShow);
         }
 
         const ImGuiTableFlags flags = ImGuiTableFlags.Borders
@@ -60,7 +102,7 @@ public class JournalSection : MainWindowSection {
 
         using var table = ImRaii.Table("##DistantSeasJournal", 6, flags);
         if (!table.Success) return;
-            
+
         ImGui.TableSetupColumn(Loc.Localize("JournalSectionDate", "Date"));
         ImGui.TableSetupColumn(Loc.Localize("JournalSectionRoute", "Route"));
         ImGui.TableSetupColumn(Loc.Localize("JournalSectionTime", "Time"));
@@ -69,11 +111,15 @@ public class JournalSection : MainWindowSection {
         ImGui.TableSetupColumn(Loc.Localize("JournalSectionButtons", "Buttons"));
         ImGui.TableHeadersRow();
 
-        foreach (var entry in this.journalEntries!) {
+        var filteredEntries = FilterEntries(this.journalEntries);
+        int count = 0;
+
+        foreach (var entry in filteredEntries) {
+            if (count >= maxEntriesToShow) break;
+
             ImGui.TableNextRow();
             ImGui.TableNextColumn();
 
-            // 2023-01-01 12:00:00 PM
             var dateStr = entry.Time.ToString("yyyy-MM-dd hh:mm:ss tt");
             ImGui.TextUnformatted(dateStr);
             ImGui.TableNextColumn();
@@ -101,7 +147,36 @@ public class JournalSection : MainWindowSection {
                 if (enabled) {
                     File.Delete(entry.Path);
                     this.UpdateJournalEntries();
+                    this.UpdateAvailableDates();
                 }
+            }
+
+            count++;
+        }
+    }
+
+    private List<JournalEntryInfo> FilterEntries(List<JournalEntryInfo>? entries) {
+        if (entries == null) return new List<JournalEntryInfo>();
+
+        return entries.Where(entry => {
+            switch (selectedFilter) {
+                case "today":
+                    return entry.Time.Date == DateTime.Today;
+                case "week":
+                    return entry.Time.Date >= DateTime.Today.AddDays(-7);
+                case "custom":
+                    return selectedDate.HasValue && entry.Time.Date == selectedDate.Value.Date;
+                default:
+                    return true;
+            }
+        }).ToList();
+    }
+
+    private void UpdateAvailableDates() {
+        availableDates.Clear();
+        if (journalEntries != null) {
+            foreach (var entry in journalEntries) {
+                availableDates.Add(entry.Time.Date);
             }
         }
     }
