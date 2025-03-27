@@ -22,6 +22,5 @@ Note that the SpreadsheetSpaghetti project is *incredibly* unoptimized - using u
 To run it, provide the path to your game path, and the output directory:
 
 ```shell
-dotnet run --project DistantSeas.SpreadsheetSpaghetti -- "G:/Steam/steamapps/com
-mon/FINAL FANTASY XIV Online/game/sqpack" ./Data
+dotnet run --project DistantSeas.SpreadsheetSpaghetti -- "G:/games/steam/steamapps/common/FINAL FANTASY XIV Online/game/sqpack" ./Data
 ```
