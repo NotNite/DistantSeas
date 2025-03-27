@@ -70,7 +70,7 @@ public unsafe class NormalStateTracker : IStateTracker {
     public uint GetStatusStacks(uint id) {
         var list = Plugin.ClientState.LocalPlayer!.StatusList;
         var entry = list.FirstOrDefault(x => x.StatusId == id);
-        return entry?.StackCount ?? (uint) 0;
+        return entry?.Param ?? (uint) 0;
     }
 
     public int GetItemCount(uint id) {

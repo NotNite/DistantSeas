@@ -7,6 +7,7 @@ using Dalamud.Logging;
 using Dalamud.Plugin.Services;
 using DistantSeas.Common;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
 
@@ -15,7 +16,6 @@ namespace DistantSeas.Fishing;
 public class BaitManager : IDisposable {
     private ExcelSheet<IKDRoute> ikdRoute;
 
-    private nint currentBaitAddr;
     private delegate byte ExecuteCommandDelegate(int id, int unk1, uint baitId, int unk2, int unk3);
     private ExecuteCommandDelegate executeCommand;
 
@@ -28,10 +28,8 @@ public class BaitManager : IDisposable {
         this.ikdRoute = Plugin.DataManager.Excel.GetSheet<IKDRoute>()!;
 
         // Stolen from my Simple Tweaks bait command tweak:
-        // https://github.com/Caraxi/SimpleTweaksPlugin/blob/278688543b936b2081b366ef80667ae48bb784e0/Tweaks/BaitCommand.cs#L34C32-L34C32 
-        this.currentBaitAddr =
-            Plugin.SigScanner.GetStaticAddressFromSig("3B 05 ?? ?? ?? ?? 75 ?? 80 7E");
-        var executeCommandPtr = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? EB ?? 83 7C 2F ?? 00");
+        // https://github.com/Caraxi/SimpleTweaksPlugin/blob/e09b4ae7b879fa7db7a9e6091a1d79067513dd39/Tweaks/BaitCommand.cs#L26C17-L26C40
+        var executeCommandPtr = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? 8D 46 0A");
         executeCommand = Marshal.GetDelegateForFunctionPointer<ExecuteCommandDelegate>(executeCommandPtr);
 
         Plugin.Framework.Update += this.FrameworkUpdate;
@@ -42,7 +40,7 @@ public class BaitManager : IDisposable {
     }
 
     private unsafe void FrameworkUpdate(IFramework framework) {
-        this.CurrentBait = *(uint*) this.currentBaitAddr;
+        this.CurrentBait = UIState.Instance()->PlayerState.FishingBait;
 
         var tracker = Plugin.StateTracker;
         if (
