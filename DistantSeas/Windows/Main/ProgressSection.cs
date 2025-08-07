@@ -7,7 +7,7 @@ using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
 using DistantSeas.Core;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
 
@@ -91,7 +91,7 @@ public class ProgressSection : MainWindowSection {
         var iconId = achievement.Icon;
         var icon = Plugin.TextureProvider.GetFromGameIcon((int) iconId);
         var iconSize = ImGui.GetTextLineHeight();
-        ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, new Vector2(iconSize, iconSize));
+        ImGui.Image(icon.GetWrapOrEmpty().Handle, new Vector2(iconSize, iconSize));
         ImGui.TableNextColumn();
 
         ImGui.TextUnformatted(achievement.Name.ExtractText());

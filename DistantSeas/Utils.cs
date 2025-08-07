@@ -4,7 +4,7 @@ using CheapLoc;
 using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Utility;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using DistantSeas.Common;
 using Lumina.Excel.Sheets;
 using Range = DistantSeas.Common.Range;
