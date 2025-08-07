@@ -12,7 +12,7 @@ using Dalamud.Utility;
 using DistantSeas.Common;
 using DistantSeas.Core;
 using DistantSeas.Fishing;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace DistantSeas.Windows;
 
@@ -192,7 +192,7 @@ public class OverlayWindow : DistantSeasWindow {
             var lineHeight = ImGui.GetTextLineHeight();
             var imageHeight = new Vector2(lineHeight, lineHeight);
 
-            ImGui.Image(baitIcon.GetWrapOrEmpty().ImGuiHandle, imageHeight);
+            ImGui.Image(baitIcon.GetWrapOrEmpty().Handle, imageHeight);
             if (ImGui.IsItemHovered()) ImGui.SetTooltip(baitItem.Value.Name.ExtractText());
         }
     }
@@ -330,7 +330,7 @@ public class OverlayWindow : DistantSeasWindow {
                                : null;
 
             var cursor = ImGui.GetCursorPos();
-            ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, iconSize);
+            ImGui.Image(icon.GetWrapOrEmpty().Handle, iconSize);
 
             if (ImGui.IsItemHovered()) {
                 var str = item.Name.ToDalamudString().TextValue;

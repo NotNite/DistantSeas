@@ -10,7 +10,7 @@ using DistantSeas.Core;
 using DistantSeas.Fishing;
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
 using Lumina.Text;
@@ -169,7 +169,7 @@ public unsafe class DebugSection : MainWindowSection {
             var iconSize = new Vector2(lineHeight, lineHeight);
 
             using (ImRaii.PushId(fishy.ItemId.ToString())) {
-                ImGui.Image(icon.GetWrapOrEmpty().ImGuiHandle, iconSize);
+                ImGui.Image(icon.GetWrapOrEmpty().Handle, iconSize);
                 ImGui.SameLine();
                 ImGui.TextUnformatted(fishItem.Name.ToDalamudString().TextValue);
 
@@ -181,7 +181,7 @@ public unsafe class DebugSection : MainWindowSection {
                         var baitIcon = Plugin.TextureProvider.GetFromGameIcon((int) bait.Icon);
                         var timeStr = Utils.FormatRange(biteTime.Value.Range);
 
-                        ImGui.Image(baitIcon.GetWrapOrEmpty().ImGuiHandle, iconSize);
+                        ImGui.Image(baitIcon.GetWrapOrEmpty().Handle, iconSize);
                         ImGui.SameLine();
                         ImGui.TextUnformatted($"{baitName}: {timeStr}");
                     }
@@ -204,7 +204,7 @@ public unsafe class DebugSection : MainWindowSection {
                             var fishName = fishRow.Name.ToDalamudString().TextValue;
                             var fishIcon = Plugin.TextureProvider.GetFromGameIcon((int) fishRow.Icon);
 
-                            ImGui.Image(fishIcon.GetWrapOrEmpty().ImGuiHandle, iconSize);
+                            ImGui.Image(fishIcon.GetWrapOrEmpty().Handle, iconSize);
                             ImGui.SameLine();
                             ImGui.TextUnformatted($"x{amount} {fishName}");
                         }
@@ -232,7 +232,7 @@ public unsafe class DebugSection : MainWindowSection {
                                     var weatherName = weatherRow.Name.ToDalamudString().TextValue;
                                     var weatherIcon = Plugin.TextureProvider.GetFromGameIcon((uint) weatherRow.Icon);
 
-                                    ImGui.Image(weatherIcon.GetWrapOrEmpty().ImGuiHandle, iconSize);
+                                    ImGui.Image(weatherIcon.GetWrapOrEmpty().Handle, iconSize);
                                     ImGui.SameLine();
                                     ImGui.TextUnformatted(weatherName);
                                 }

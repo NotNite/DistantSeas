@@ -7,7 +7,7 @@ using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
 using DistantSeas.Common;
 using DistantSeas.Core;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace DistantSeas.Windows.Main;
 

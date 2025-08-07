@@ -10,7 +10,7 @@ using DistantSeas.Common;
 using DistantSeas.Core;
 using DistantSeas.Tracking;
 using DistantSeas.Tracking.LogEntries;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace DistantSeas.Windows.Main;
 

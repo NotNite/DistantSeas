@@ -9,7 +9,7 @@ using Dalamud.Interface.Utility;
 using Dalamud.Utility;
 using DistantSeas.Core;
 using FFXIVClientStructs.FFXIV.Common.Math;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace DistantSeas.Windows.Main;
 
@@ -28,7 +28,7 @@ public class AboutSection : MainWindowSection {
     public override void Draw() {
         var iconWidth = ImGui.GetContentRegionAvail().X / 4;
         ImGuiHelpers.CenterCursorFor((int) iconWidth);
-        ImGui.Image(this.icon.GetWrapOrEmpty().ImGuiHandle, new Vector2(iconWidth, iconWidth));
+        ImGui.Image(this.icon.GetWrapOrEmpty().Handle, new Vector2(iconWidth, iconWidth));
 
         var headerStr = Loc.Localize("AboutSectionHeader", "Distant Seas, by NotNite");
         var versionStr = Loc.Localize("AboutSectionVersion", "Version {0}");
