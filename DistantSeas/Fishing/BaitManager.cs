@@ -191,7 +191,7 @@ public class BaitManager : IDisposable {
 
     public unsafe bool CanChangeBait() {
         // fucking dalamud apis being broken
-        var chara = (Character*) Plugin.ClientState.LocalPlayer?.Address;
+        var chara = (Character*) Plugin.ObjectTable.LocalPlayer?.Address;
         if (chara == null) return false;
 
         return chara->CharacterData.ClassJob == 18 &&      // FSH

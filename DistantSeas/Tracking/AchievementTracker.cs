@@ -56,7 +56,7 @@ public unsafe class AchievementTracker : IDisposable {
     }
 
     private string GetFilePath() {
-        var cid = Plugin.ClientState.LocalContentId;
+        var cid = Plugin.PlayerState.ContentId;
         var hex = cid.ToString("X8");
         return Plugin.ResourceManager.GetConfigPath("achievement", hex + ".json");
     }
