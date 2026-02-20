@@ -108,7 +108,10 @@ public class JournalSection : MainWindowSection {
 
     private void UpdateJournalEntries() {
         var path = Plugin.ResourceManager.GetConfigPath("logs");
-        if (!Directory.Exists(path)) return;
+        if (!Directory.Exists(path)) {
+            this.journalEntries = [];
+            return;
+        };
         var files = Directory.GetFiles(path);
 
         var newEntries = new List<JournalEntryInfo>();
