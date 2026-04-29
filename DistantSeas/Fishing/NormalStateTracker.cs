@@ -20,7 +20,7 @@ public unsafe class NormalStateTracker : IStateTracker {
     public bool IsDataLoaded => this.MissionState.Count > 0
                                 && this.MissionState[0].Row != 0
                                 // this is a bad place to put these checks but whatevs
-                                && Plugin.BaitManager.GetCurrentTime() != null;
+                                && Plugin.BaitManager?.GetCurrentTime() != null;
 
     public uint Points { get; set; } = 0;
     public uint TotalPoints { get; set; } = 0;
@@ -123,11 +123,15 @@ public unsafe class NormalStateTracker : IStateTracker {
 
             if (oceanFishing->Mission1Type != 0) {
                 if (this.MissionState.Count <= 0) {
-                    this.MissionState = new List<MissionState> {
-                        new(oceanFishing->Mission1Type),
-                        new(oceanFishing->Mission2Type),
-                        new(oceanFishing->Mission3Type)
-                    };
+                    try {
+                        this.MissionState = new List<MissionState> {
+                            new(oceanFishing->Mission1Type),
+                            new(oceanFishing->Mission2Type),
+                            new(oceanFishing->Mission3Type)
+                        };
+                    } catch {
+                        // probably invalid mission types
+                    }
                 }
 
                 this.MissionState[0].Progress = oceanFishing->Mission1Progress;

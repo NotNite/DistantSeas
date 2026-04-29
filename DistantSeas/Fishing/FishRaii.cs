@@ -143,7 +143,11 @@ public class FishRaii : IDisposable {
     public Item GetFishItem(Fish fish) => this.itemSheet.GetRow(fish.ItemId)!;
 
     public Item? GetCurrentBaitItem() {
-        var baitId = Plugin.BaitManager.CurrentBait;
-        return baitId != 0 ? this.itemSheet.GetRow(baitId) : null;
+        try {
+            var baitId = Plugin.BaitManager.CurrentBait;
+            return baitId != 0 ? this.itemSheet.GetRow(baitId) : null;
+        } catch {
+            return null;
+        }
     }
 }

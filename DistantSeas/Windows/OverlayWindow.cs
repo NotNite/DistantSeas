@@ -194,6 +194,8 @@ public class OverlayWindow : DistantSeasWindow {
 
             ImGui.Image(baitIcon.GetWrapOrEmpty().Handle, imageHeight);
             if (ImGui.IsItemHovered()) ImGui.SetTooltip(baitItem.Value.Name.ExtractText());
+        } else {
+            ImGui.Dummy(Vector2.Zero);
         }
     }
 

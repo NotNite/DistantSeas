@@ -17,20 +17,16 @@ public unsafe class AchievementTracker : IDisposable {
     private const uint OnABoatFive = 2758;
     public const uint OnABoatFiveGoal = 3_000_000;
 
-    public delegate void ReceiveAchievementProgressDelegate(Achievement* achievement, uint id, uint current, uint max);
-
-    // Signature stolen from CS, it's just not updated in Dalamud yet
-    // https://github.com/aers/FFXIVClientStructs/blob/e6d2de7240f8cbc6a9a2a7133ad633ebfef6d33e/FFXIVClientStructs/FFXIV/Client/Game/UI/Achievement.cs#L24
-    [Signature(
-        "C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 44 89 81",
-        UseFlags = SignatureUseFlags.Hook,
-        DetourName = nameof(ReceiveAchievementProgressDetour)
-    )]
-    public Hook<ReceiveAchievementProgressDelegate> ReceiveAchievementProgressHook = null!;
+    private readonly Hook<Achievement.Delegates.ReceiveAchievementProgress> receiveAchievementProgressHook;
 
     public AchievementTracker() {
-        Plugin.GameInteropProvider.InitializeFromAttributes(this);
-        this.ReceiveAchievementProgressHook.Enable();
+        this.receiveAchievementProgressHook = Plugin.GameInteropProvider.HookFromAddress
+            <Achievement.Delegates.ReceiveAchievementProgress>(
+                Achievement.MemberFunctionPointers
+                           .ReceiveAchievementProgress,
+                this.ReceiveAchievementProgressDetour
+            );
+        this.receiveAchievementProgressHook.Enable();
 
         for (uint i = 2553; i <= 2566; i++) this.Achievements.Add(i);
         for (uint i = 2603; i <= 2606; i++) this.Achievements.Add(i);
@@ -46,7 +42,7 @@ public unsafe class AchievementTracker : IDisposable {
     }
 
     public void Dispose() {
-        this.ReceiveAchievementProgressHook.Dispose();
+        this.receiveAchievementProgressHook.Dispose();
         this.achievementTimer.Dispose();
         Plugin.ClientState.Logout -= this.OnLogout;
     }
@@ -102,7 +98,7 @@ public unsafe class AchievementTracker : IDisposable {
             }
         }
 
-        this.ReceiveAchievementProgressHook.Original(achievement, id, current, max);
+        this.receiveAchievementProgressHook.Original(achievement, id, current, max);
     }
 
     private void UpdateAchievements() {

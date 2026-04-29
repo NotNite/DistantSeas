@@ -6,6 +6,7 @@ using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Logging;
 using Dalamud.Plugin.Services;
 using DistantSeas.Common;
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using Lumina.Excel;
@@ -16,9 +17,6 @@ namespace DistantSeas.Fishing;
 public class BaitManager : IDisposable {
     private ExcelSheet<IKDRoute> ikdRoute;
 
-    private delegate byte ExecuteCommandDelegate(int id, int unk1, uint baitId, int unk2, int unk3);
-    private ExecuteCommandDelegate executeCommand;
-
     public uint CurrentBait = 0;
 
     public uint? OverrideZone = null;
@@ -26,11 +24,6 @@ public class BaitManager : IDisposable {
 
     public BaitManager() {
         this.ikdRoute = Plugin.DataManager.Excel.GetSheet<IKDRoute>()!;
-
-        // Stolen from my Simple Tweaks bait command tweak:
-        // https://github.com/Caraxi/SimpleTweaksPlugin/blob/e09b4ae7b879fa7db7a9e6091a1d79067513dd39/Tweaks/BaitCommand.cs#L26C17-L26C40
-        var executeCommandPtr = Plugin.SigScanner.ScanText("E8 ?? ?? ?? ?? 8D 46 0A");
-        executeCommand = Marshal.GetDelegateForFunctionPointer<ExecuteCommandDelegate>(executeCommandPtr);
 
         Plugin.Framework.Update += this.FrameworkUpdate;
     }
@@ -52,16 +45,20 @@ public class BaitManager : IDisposable {
     }
 
     public Time? GetCurrentTime() {
-        var route = this.ikdRoute.GetRow(Plugin.StateTracker.CurrentRoute)!;
-        var time = route.Time[(int) this.CurrentZone].Value.RowId;
-        return time == 0 ? null : (Time) time;
+        try {
+            var route = this.ikdRoute.GetRow(Plugin.StateTracker.CurrentRoute)!;
+            var time = route.Time[(int) this.CurrentZone].Value.RowId;
+            return time == 0 ? null : (Time) time;
+        } catch {
+            return null;
+        }
     }
 
     public Spot GetCurrentSpot() {
         var route = this.ikdRoute.GetRow(Plugin.StateTracker.CurrentRoute)!;
         var spotId = route.Spot[(int) this.CurrentZone].RowId;
-        return Plugin.FishData.Spots.First(
-            x => x.Type == (SpotType) spotId && x.IsSpectral == Plugin.StateTracker.IsSpectralActive
+        return Plugin.FishData.Spots.First(x => x.Type == (SpotType) spotId &&
+                                                x.IsSpectral == Plugin.StateTracker.IsSpectralActive
         );
     }
 
@@ -186,7 +183,7 @@ public class BaitManager : IDisposable {
             return;
         }
 
-        this.executeCommand(701, 4, id, 0, 0);
+        GameMain.ExecuteCommand(701, 4, (int) id);
     }
 
     public unsafe bool CanChangeBait() {

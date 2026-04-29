@@ -35,7 +35,7 @@ public unsafe class Journal : IDisposable {
     public delegate nint OnIKDFishCaughtDelegate(nint a1, IKDFishCatch* fishCatch);
 
     [Signature(
-        "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 72 ?? 48 8B FA 48 8B D9",
+        "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B 5A 10",
         UseFlags = SignatureUseFlags.Hook,
         DetourName = nameof(OnIKDFishCaughtDetour)
     )]
