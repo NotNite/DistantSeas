@@ -122,21 +122,21 @@ public unsafe class NormalStateTracker : IStateTracker {
             this.IsSpectralActive = oceanFishing->SpectralCurrentActive;
 
             if (oceanFishing->Mission1Type != 0) {
-                if (this.MissionState.Count <= 0) {
-                    try {
-                        this.MissionState = new List<MissionState> {
+                try {
+                    if (this.MissionState.Count <= 0) {
+                        this.MissionState = [
                             new(oceanFishing->Mission1Type),
                             new(oceanFishing->Mission2Type),
                             new(oceanFishing->Mission3Type)
-                        };
-                    } catch {
-                        // probably invalid mission types
+                        ];
                     }
-                }
 
-                this.MissionState[0].Progress = oceanFishing->Mission1Progress;
-                this.MissionState[1].Progress = oceanFishing->Mission2Progress;
-                this.MissionState[2].Progress = oceanFishing->Mission3Progress;
+                    this.MissionState[0].Progress = oceanFishing->Mission1Progress;
+                    this.MissionState[1].Progress = oceanFishing->Mission2Progress;
+                    this.MissionState[2].Progress = oceanFishing->Mission3Progress;
+                } catch {
+                    // probably invalid mission types
+                }
             }
         }
     }
