@@ -12,7 +12,7 @@ public class LogEntryZoneChanged : LogEntry {
 
     public LogEntryZoneChanged(IStateTracker stateTracker) {
         this.Zone = stateTracker.CurrentZone;
-        this.CurrentTime = Plugin.BaitManager.GetCurrentTime();
+        this.CurrentTime = Plugin.BaitManager?.GetCurrentTime();
         this.CurrentWeather = stateTracker.CurrentWeather;
     }
 }

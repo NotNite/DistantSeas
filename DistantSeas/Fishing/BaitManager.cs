@@ -113,12 +113,12 @@ public class BaitManager : IDisposable {
         if (bestBait.Count == 1) return bestBait.First().Key;
 
         // Find the one with least overlap for other fish
-        (uint, int)? leastOverlap = null;
+        (uint, float)? leastOverlap = null;
         var end = 45; // picked arbitrarily
         foreach (var baitId in bestBait.Select(x => x.Key)) {
             var range = fish.BiteTimes[baitId].Range;
             var rangeEnd = range.End ?? end;
-            var overlapTotal = 0;
+            var overlapTotal = 0f;
 
             foreach (var otherFish in spot.Fish) {
                 if (!otherFish.BiteTimes.ContainsKey(baitId)) continue;

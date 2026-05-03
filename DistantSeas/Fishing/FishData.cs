@@ -26,7 +26,7 @@ public class FishData {
             new() {SpotType.BloodbrineSea, SpotType.RothlytSound, SpotType.NorthernMerlthor, SpotType.RhotanoSea}
         }, {
             RouteType.Ruby,
-            new() {SpotType.OneRiver, SpotType.RubySea}
+            new() {SpotType.Thavnair, SpotType.OneRiver, SpotType.Thavnair, SpotType.RubySea}
         }
     };
 
@@ -39,7 +39,10 @@ public class FishData {
             }
         }, {
             RouteType.Ruby,
-            new() {Time.Day, Time.Day, Time.Sunset, Time.Sunset, Time.Night, Time.Night}
+            new() {
+                Time.Sunset, Time.Sunset, Time.Sunset, Time.Sunset, Time.Night, Time.Night, Time.Night, Time.Night,
+                Time.Day, Time.Day, Time.Day, Time.Day
+            }
         }
     };
 
@@ -184,14 +187,14 @@ public class FishData {
                 // IKDPlayerMissionCondition
                 var meetsMission = mission.Row switch {
                     // Catch fish with a weak bite (!)
-                    4 or 10 or 16 or 22 or 27 or 32 => fish.BitePower == 1,
+                    4 or 10 or 16 or 22 or 27 or 32 or 37 => fish.BitePower == 1,
                     // Catch fish with a strong bite (!!)
-                    5 or 11 or 17 or 23 or 28 or 33 => fish.BitePower == 2,
+                    5 or 11 or 17 or 23 or 28 or 33 or 38 => fish.BitePower == 2,
                     // Catch fish with a ferocious bite (!!!)
-                    6 or 12 or 18 or 24 or 29 or 34 => fish.BitePower == 3,
+                    6 or 12 or 18 or 24 or 29 or 34 or 39 => fish.BitePower == 3,
 
                     // Catch fish rated ★★★ or higher
-                    2 or 8 or 14 or 20 or 26 or 31 => fish.Stars >= 3,
+                    2 or 8 or 14 or 20 or 26 or 31 or 36 => fish.Stars >= 3,
 
                     // Catch jellyfish or crabs
                     1 => fish.VoyageMissionType is VoyageMissionType.Jellyfish or VoyageMissionType.Crab,
@@ -205,6 +208,8 @@ public class FishData {
                     25 => fish.VoyageMissionType is VoyageMissionType.Shrimp or VoyageMissionType.Squid,
                     // Catch shrimp or shellfish
                     30 => fish.VoyageMissionType is VoyageMissionType.Shrimp or VoyageMissionType.Shellfish,
+                    // Catch mantis shrimp or prehistoric wavekin
+                    35 => fish.VoyageMissionType is VoyageMissionType.MantisShrimp or VoyageMissionType.PrehistoricWavekin,
 
                     _ => false
                 };

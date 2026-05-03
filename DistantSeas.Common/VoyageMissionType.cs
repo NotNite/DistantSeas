@@ -11,5 +11,7 @@ public enum VoyageMissionType {
     Fugu,
     Squid,
     Shrimp,
-    Shellfish
+    Shellfish,
+    MantisShrimp,
+    PrehistoricWavekin
 }

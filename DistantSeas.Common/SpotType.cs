@@ -16,5 +16,8 @@ public enum SpotType {
     SirensongSea = 8,
     KuganeCoast = 9,
     RubySea = 10,
-    OneRiver = 11
+    OneRiver = 11,
+
+    UnnamedIsland = 12,
+    Thavnair = 13
 }

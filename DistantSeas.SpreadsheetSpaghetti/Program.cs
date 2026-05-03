@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 using DistantSeas.Common;
 using DistantSeas.SpreadsheetSpaghetti;
 using Lumina;
@@ -11,7 +12,7 @@ using Range = DistantSeas.Common.Range;
 // replace ID in spreadsheet URL if it ever moves
 // GIDs are found by going to the tab and looking at the end of the URL
 const string spreadsheetUrl =
-    "https://docs.google.com/spreadsheets/d/1uuK0E6pfBtW0Jdlexy8gPbT1p5WTr_Cruv7mmgR3BH0/export?format=tsv&gid=";
+    "https://docs.google.com/spreadsheets/d/1uuK0E6pfBtW0Jdlexy8gPbT1p5WTr_Cruv7mmgR3BH0" + "/export?format=tsv&gid=";
 
 var gamePath = args[0];
 var outPath = args[1];
@@ -82,15 +83,9 @@ Spot ProcessSpot(
     var parts = header.Split("\t");
     for (var i = 0; i < 4; i++) {
         var name = parts[i + 3];
+        if (name == "Mooch") continue;
 
-        // thanks
-        var realName = name switch {
-            "H. Steel Jig" => "Heavy Steel Jig",
-            "Shrimp Cage" => "Shrimp Cage Feeder",
-            _ => name
-        };
-
-        var bait = LookupByName(realName);
+        var bait = LookupByName(name);
         baits[i] = bait.RowId;
     }
 
@@ -110,12 +105,15 @@ Spot ProcessSpot(
 }
 
 Item LookupByName(string name) {
-    return item.ToList()
-               .First(x => {
-                   var nameLowercase = name.ToLower();
-                   var itemNameLowercase = x.Name.ExtractText().ToLower();
-                   return itemNameLowercase == nameLowercase;
-               });
+    var realName = name switch {
+        "H. Steel Jig" => "Heavy Steel Jig",
+        "Shrimp Cage" => "Shrimp Cage Feeder",
+        "Jade Shrimp" => "Jade Mantis Shrimp",
+        "Cieldales Roosterfish" => "Cieldalaes roosterfish",
+        _ => name
+    };
+    realName = realName.ToLower();
+    return item.First(x => x.Name.ExtractText().ToLower() == realName);
 }
 
 Fish ParseFish(RouteType type, uint[] baits, List<string> availability, string row) {
@@ -127,27 +125,70 @@ Fish ParseFish(RouteType type, uint[] baits, List<string> availability, string r
         (cellType, name) = ParseCellType(name);
     }
 
-    // thanks
-    var realName = name switch {
-        "Jade Shrimp" => "Jade Mantis Shrimp",
-        _ => name
-    };
-    var fishItem = LookupByName(realName);
-
-    var unparsedBiteTimes = new[] {
-        ParseBiteTime(parts[1]),
-        ParseBiteTime(parts[2]),
-        ParseBiteTime(parts[3]),
-        ParseBiteTime(parts[4])
-    };
+    var fishItem = LookupByName(name);
     var biteTimes = new Dictionary<uint, BiteTime>();
 
-    for (var i = 0; i < 4; i++) {
-        var biteTime = unparsedBiteTimes[i];
-        if (biteTime == null) continue;
-        var bait = baits[i];
-        biteTimes[bait] = biteTime;
+    Mooch? mooch = null;
+    uint? requiredBait = null;
+    if (parts[1].StartsWith("MO!")) {
+        var moochPart = parts[1].Substring("MO!".Length);
+        if (moochPart.StartsWith(star)) {
+            moochPart = moochPart.Substring(star.Length);
+        }
+
+        // Mooch only, 7-13
+        // Rothlyt Mussel Mooch, 9+ seconds
+        // Cieldalaes Roosterfish Mooch, ~6 ~ 8s
+
+        var separator = ", ";
+        var separatorIndex = moochPart.IndexOf(separator, StringComparison.Ordinal);
+
+        var beforeSep = moochPart.Substring(0, separatorIndex);
+        var afterSep = moochPart.Substring(separatorIndex + separator.Length);
+
+        uint? moochBait = null;
+        if (beforeSep != "Mooch only") {
+            var moochFish = beforeSep.Split("Mooch")[0].Trim();
+            moochFish = moochFish.Replace(star, "");
+            moochBait = LookupByName(moochFish).RowId;
+        }
+
+        var moochBiteTimes = ParseRange(afterSep);
+        if (moochBiteTimes == null) {
+            throw new Exception("Failed to parse mooch bite times");
+        }
+
+        mooch = new Mooch {
+            RequiredBait = moochBait,
+            Range = moochBiteTimes
+        };
+
+        // Any bite times we parse here are invalid
+        biteTimes.Clear();
+    } else {
+        for (var i = 0; i < 4; i++) {
+            var part = parts[i + 1];
+            if (part.StartsWith("MO!")) {
+                // TODO: handle this weird mooch case
+                continue;
+            }
+
+            var biteTime = ParseBiteTime(parts[i + 1]);
+            if (biteTime == null) continue;
+
+            var bait = baits[i];
+            if (bait == 0) throw new Exception("what");
+            biteTimes[bait] = biteTime;
+        }
+
+        if (parts[1].Contains(star)) {
+            var starPos = parts[1].IndexOf(star, StringComparison.Ordinal);
+            var baitName = parts[1].Substring(starPos + star.Length).Trim();
+            var bait = LookupByName(baitName);
+            requiredBait = bait.RowId;
+        }
     }
+
 
     var timeAvailability = new Dictionary<Time, bool>();
     var weatherAvailability = new Dictionary<WeatherType, bool>();
@@ -202,50 +243,6 @@ Fish ParseFish(RouteType type, uint[] baits, List<string> availability, string r
         }
     }
 
-    // TODO: use MO! detection
-    Mooch? mooch = null;
-    uint? requiredBait = null;
-    if (parts[1].Contains("Mooch")) {
-        // Mooch only, 7-13
-        // Rothlyt Mussel Mooch, 9+ seconds
-
-        var moochPart = parts[1];
-        if (moochPart.Contains('!')) {
-            moochPart = moochPart.Substring(moochPart.IndexOf('!') + 1);
-        }
-
-        var separator = ", ";
-        var separatorIndex = moochPart.IndexOf(separator, StringComparison.Ordinal);
-
-        var beforeSep = moochPart.Substring(0, separatorIndex);
-        var afterSep = moochPart.Substring(separatorIndex + separator.Length);
-
-        uint? moochBait = null;
-        if (beforeSep != "Mooch only") {
-            var moochFish = beforeSep.Split("Mooch")[0].Trim();
-            moochFish = moochFish.Replace(star, "");
-            moochBait = LookupByName(moochFish).RowId;
-        }
-
-        var moochBiteTimes = ParseRange(afterSep);
-        if (moochBiteTimes == null) {
-            throw new Exception("Failed to parse mooch bite times");
-        }
-
-        mooch = new Mooch {
-            RequiredBait = moochBait,
-            Range = moochBiteTimes
-        };
-
-        // Any bite times we parse here are invalid
-        biteTimes.Clear();
-    } else if (parts[1].Contains(star)) {
-        var starPos = parts[1].IndexOf(star, StringComparison.Ordinal);
-        var baitName = parts[1].Substring(starPos + star.Length).Trim();
-        var bait = LookupByName(baitName);
-        requiredBait = bait.RowId;
-    }
-
     var voyageMissionType = parts[^2] switch {
         "S" => VoyageMissionType.Shark,
         "J" => VoyageMissionType.Jellyfish,
@@ -254,6 +251,8 @@ Fish ParseFish(RouteType type, uint[] baits, List<string> availability, string r
         "Q" => VoyageMissionType.Squid,
         "H" => VoyageMissionType.Shrimp,
         "M" => VoyageMissionType.Shellfish,
+        "N" => VoyageMissionType.MantisShrimp,
+        "P" => VoyageMissionType.PrehistoricWavekin,
         _ => VoyageMissionType.None
     };
 
@@ -315,26 +314,33 @@ BiteTime? ParseBiteTime(string str) {
 }
 
 Intuition? ParseIntuition(string intuition) {
-    if (intuition.StartsWith("Intuition:")) {
-        var firstSpace = intuition.IndexOf(" ", StringComparison.Ordinal);
-        var lastSpace = intuition.LastIndexOf(" ", StringComparison.Ordinal);
+    const string prefix = "Intuition: ";
+    if (intuition.StartsWith(prefix)) {
+        intuition = intuition.Substring(prefix.Length);
 
-        var durationStr = intuition.Substring(lastSpace + 2, intuition.Length - lastSpace - 2 - 2);
+        // achievement info which we don't care about
+        const string countsFor = "Counts for";
+        if (intuition.Contains(countsFor)) {
+            intuition = intuition.Substring(0, intuition.IndexOf(countsFor, StringComparison.Ordinal));
+        }
+
+        intuition = intuition.Trim();
+
+        var parenthesis = intuition.IndexOf("(", StringComparison.Ordinal);
+        var durationStr = intuition.Substring(parenthesis + 1, intuition.Length - parenthesis - 2).Trim();
+        if (durationStr.EndsWith("s")) durationStr = durationStr[..^1];
         var duration = int.Parse(durationStr);
 
-        var fishStrs = intuition.Substring(firstSpace + 1, lastSpace - firstSpace - 1).Split(", ");
+        var fishStrs = intuition.Substring(0, parenthesis).Trim().Split(", ");
         var fish = new List<(uint, int)>();
         foreach (var fishy in fishStrs) {
             var fishySpace = fishy.IndexOf(" ", StringComparison.Ordinal);
             var amntStr = fishy.Substring(0, fishySpace);
             var fishName = fishy.Substring(fishySpace + 1);
 
-            int amnt;
-            if (amntStr.StartsWith("x")) {
-                amnt = int.Parse(amntStr.Substring(1));
-            } else {
-                amnt = int.Parse(amntStr.Substring(0, amntStr.Length - 1));
-            }
+            if (amntStr.StartsWith("x")) amntStr = amntStr[1..];
+            if (amntStr.EndsWith("x")) amntStr = amntStr[..^1];
+            var amnt = int.Parse(amntStr);
 
             var fishItem = LookupByName(fishName);
             fish.Add((fishItem.RowId, amnt));
@@ -355,13 +361,15 @@ Range? ParseRange(string range) {
     // no idea how to parse these
     if (range.Contains(star)) return null;
 
+    range = range.Trim();
+
     // 1 - 2
-    var twoRegex = new Regex(@"\d+ ?- ?\d+");
+    var twoRegex = new Regex(@"^~?(\d*\.?\d+)s? ?[-~] ?~?(\d*\.?\d+)s?$");
     var twoMatch = twoRegex.Match(range);
     if (twoMatch.Success) {
-        var parts = twoMatch.Value.Split("-");
-        var start = int.Parse(parts[0]);
-        var end = int.Parse(parts[1]);
+        var start = float.Parse(twoMatch.Groups[1].Value);
+        var end = float.Parse(twoMatch.Groups[2].Value);
+        // Console.WriteLine($"{range} -> {start} {end}");
         return new Range {
             Type = Range.RangeType.Range,
             Start = start,
@@ -369,25 +377,16 @@ Range? ParseRange(string range) {
         };
     }
 
-    // 1+
-    var plusRegex = new Regex(@"\d+ ?\+");
-    var plusMatch = plusRegex.Match(range);
-    if (plusMatch.Success) {
-        var start = int.Parse(plusMatch.Value.Split("+")[0]);
+    // 1 and 1+
+    var oneRegex = new Regex(@"^~?(\d*\.?\d+)s? ?(\+)?$");
+    var oneMatch = oneRegex.Match(range);
+    if (oneMatch.Success) {
+        var start = float.Parse(oneMatch.Groups[1].Value);
+        var isLooseRange = !string.IsNullOrWhiteSpace(oneMatch.Groups[2].Value);
+        var type = isLooseRange ? Range.RangeType.LooseRange : Range.RangeType.Single;
+        // Console.WriteLine($"{range} -> {start} {type}");
         return new Range {
-            Type = Range.RangeType.LooseRange,
-            Start = start,
-            End = null
-        };
-    }
-
-    // 1
-    var singleRegex = new Regex(@"\d+");
-    var singleMatch = singleRegex.Match(range);
-    if (singleMatch.Success) {
-        var start = int.Parse(singleMatch.Value);
-        return new Range {
-            Type = Range.RangeType.Single,
+            Type = type,
             Start = start,
             End = null
         };
@@ -410,7 +409,7 @@ string Process(RouteType type) {
     var allSpots = ikdSpot.ToList();
     var spots = type switch {
         RouteType.Indigo => allSpots.Skip(1).Take(7), // 1 to 7
-        RouteType.Ruby => allSpots.Skip(8).Take(4)    // 8 to 11
+        RouteType.Ruby => allSpots.Skip(8).Take(6)    // 8 to 13
     };
 
     var arr = new List<Spot>();

@@ -48,12 +48,12 @@ public class Fish {
         var maxPoints = (HookType.Single, 0, 0);
 
         if (this.DoubleHook != null) {
-            var dhPoints = this.DoubleHook.End ?? this.DoubleHook.Start;
+            var dhPoints = (int) (this.DoubleHook.End ?? this.DoubleHook.Start);
             if (dhPoints > maxPoints.Item2) maxPoints = (HookType.Double, dhPoints, dhPoints * this.AveragePoints);
         }
 
         if (this.TripleHook != null) {
-            var thPoints = this.TripleHook.End ?? this.TripleHook.Start;
+            var thPoints = (int) (this.TripleHook.End ?? this.TripleHook.Start);
             if (thPoints > maxPoints.Item2) maxPoints = (HookType.Triple, thPoints, thPoints * this.AveragePoints);
         }
 

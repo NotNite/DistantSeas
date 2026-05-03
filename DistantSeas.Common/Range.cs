@@ -4,8 +4,8 @@ namespace DistantSeas.Common;
 
 public class Range {
     public RangeType Type;
-    public int Start;
-    public int? End;
+    public float Start;
+    public float? End;
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum RangeType {

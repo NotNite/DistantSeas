@@ -303,7 +303,7 @@ public unsafe class DebugSection : MainWindowSection {
             var route = (int) dst.CurrentRoute;
             if (ImGui.InputInt("Current route", ref route)) {
                 if (route < 1) route = 1;
-                if (route > 18) route = 18;
+                if (route > 21) route = 21;
                 dst.CurrentRoute = (uint) route;
             }
 
