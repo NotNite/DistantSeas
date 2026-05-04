@@ -41,6 +41,8 @@ public static class Utils {
             VoyageMissionType.Squid => Loc.Localize("VoyageMissionTypeSquid", "Squid"),
             VoyageMissionType.Shrimp => Loc.Localize("VoyageMissionTypeShrimp", "Shrimp"),
             VoyageMissionType.Shellfish => Loc.Localize("VoyageMissionTypeShellfish", "Shellfish"),
+            VoyageMissionType.MantisShrimp => Loc.Localize("VoyageMissionTypeMantisShrimp", "Mantis Shrimp"),
+            VoyageMissionType.PrehistoricWavekin => Loc.Localize("VoyageMissionTypePrehistoricWavekin", "Prehistoric Wavekin"),
             _ => "???"
         };
     }
